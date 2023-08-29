@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http; // Import the http package
+import 'dart:convert'; // Import the dart:convert library
 import 'package:research_project/screens/buyer_seller/optimizing_best_buyer_screen.dart';
 import 'package:research_project/screens/buyer_seller/optimizing_best_farmer_screen.dart';
 
@@ -23,15 +25,36 @@ class _BuyerInputState extends State<BuyerInput> {
     'Banana Peel',
   ];
 
-  void _submitForm() {
-    // Handle form submission
-    // You can access the form values here (_selectedProductType, _quantity, _minPrice, _maxPrice, _location, _radius)
+ void _submitForm() async {
+  final url = Uri.parse('http://127.0.0.1:5000/process_input');
+
+
+  final response = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({
+      "user_type": "buyer",
+      "product_type": _selectedProductType,
+      "quantity": _quantity,
+      "min_price": _minPrice,
+      "max_price": _maxPrice,
+      "radius": _radius,
+      "location_name": _location,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    final responseData = jsonDecode(response.body);
+    // Process and display the responseData
+  } else {
+    print('Request failed with status: ${response.statusCode}');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -78,7 +101,8 @@ class _BuyerInputState extends State<BuyerInput> {
                   setState(() {
                     _quantity = value;
                   });
-                },decoration: InputDecoration(
+                },
+                decoration: InputDecoration(
                   hintText: 'Enter the quantity you need',
                 ),
               ),
@@ -149,15 +173,11 @@ class _BuyerInputState extends State<BuyerInput> {
               SizedBox(height: 32),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OptimizingBuyerScreen()),
-                    );
-                  },
+                  onPressed:
+                      _submitForm, // Call _submitForm when button is pressed
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 204, 160, 0), // Set the background color here
+                    primary: Color.fromARGB(
+                        255, 204, 160, 0), // Set the background color here
                   ),
                   child: Text('Submit'),
                 ),
