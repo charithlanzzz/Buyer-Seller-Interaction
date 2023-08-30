@@ -30,7 +30,38 @@ class _BuyerInputState extends State<BuyerInput> {
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
-      // final url = Uri.parse('http://192.168.224.62:5000/process_input');
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(
+                    strokeWidth: 10.0,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Requirements are Optimizing',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+      await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
+
       final url = Uri.parse('http://127.0.0.1:5000/process_input');
 
       final response = await http.post(
@@ -47,6 +78,9 @@ class _BuyerInputState extends State<BuyerInput> {
           "location_name": _location,
         }),
       );
+
+      Navigator.pop(
+          context); // Close the loading dialog // Close the loading dialog
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
