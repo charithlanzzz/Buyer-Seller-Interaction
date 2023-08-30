@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; // Import the http package
+import 'package:research_project/components/buyer_seller/buyer_output.dart';
 import 'dart:convert'; // Import the dart:convert library
 import 'package:research_project/screens/buyer_seller/optimizing_best_buyer_screen.dart';
 import 'package:research_project/screens/buyer_seller/optimizing_best_farmer_screen.dart';
+
 
 class BuyerInput extends StatefulWidget {
   @override
@@ -11,7 +13,8 @@ class BuyerInput extends StatefulWidget {
 
 class _BuyerInputState extends State<BuyerInput> {
   String _selectedProductType = 'Banana';
-  String _quantity = '';
+  String _minQuantity = '';
+  String _maxQuantity = '';
   String _minPrice = '';
   String _maxPrice = '';
   String _location = '';
@@ -28,14 +31,14 @@ class _BuyerInputState extends State<BuyerInput> {
  void _submitForm() async {
   final url = Uri.parse('http://127.0.0.1:5000/process_input');
 
-
   final response = await http.post(
     url,
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       "user_type": "buyer",
       "product_type": _selectedProductType,
-      "quantity": _quantity,
+      "min_quantity": _minQuantity.toString(),  // Convert to string
+      "max_quantity": _maxQuantity.toString(),  // Convert to string
       "min_price": _minPrice,
       "max_price": _maxPrice,
       "radius": _radius,
@@ -45,11 +48,15 @@ class _BuyerInputState extends State<BuyerInput> {
 
   if (response.statusCode == 200) {
     final responseData = jsonDecode(response.body);
-    // Process and display the responseData
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BuyerOutput(responseData)),
+    );
   } else {
     print('Request failed with status: ${response.statusCode}');
   }
 }
+
 
 
   @override
@@ -93,18 +100,37 @@ class _BuyerInputState extends State<BuyerInput> {
               ),
               SizedBox(height: 8),
               Text(
-                'Quantity (Kg)',
+                'Quantity',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    _quantity = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter the quantity you need',
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          _minQuantity = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Min Quantity',
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          _maxQuantity = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Max Quantity',
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 8),
               Text(

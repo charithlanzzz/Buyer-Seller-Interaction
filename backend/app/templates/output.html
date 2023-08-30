@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Output</title>
+</head>
+<body>
+    <h1>Matching Stakeholders</h1>
+    <ul>
+        {% for stakeholder in matching_stakeholders %}
+        <li>ID: {{ stakeholder.id }}, Name: {{ stakeholder.name }}, Contact: {{ stakeholder.contact }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Recommendation Plan</h1>
+    <ul>
+        {% for plan in recommendation_plan %}
+        <li>{{ plan }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
