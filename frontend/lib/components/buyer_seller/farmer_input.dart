@@ -63,7 +63,7 @@ class _FarmerInputState extends State<FarmerInput> {
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
       final url = Uri.parse('https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
-
+      //final url = Uri.parse('http://127.0.0.1:5000/process_input');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -262,22 +262,126 @@ class _FarmerInputState extends State<FarmerInput> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the district';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          _location = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Enter your district',
-                      ),
+                    DropdownButtonFormField<String>(
+                  value: _location, // Selected value
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select your district';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      _location = value;
+                    });
+                  },
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: 'Ampara',
+                      child: Text('Ampara'),
                     ),
+                    DropdownMenuItem<String>(
+                      value: 'Anuradhapura',
+                      child: Text('Anuradhapura'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Badulla',
+                      child: Text('Badulla'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Batticaloa',
+                      child: Text('Batticaloa'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Colombo',
+                      child: Text('Colombo'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Galle',
+                      child: Text('Galle'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Gampaha',
+                      child: Text('Gampaha'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Hambantota',
+                      child: Text('Hambantota'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Jaffna',
+                      child: Text('Jaffna'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Kalutara',
+                      child: Text('Kalutara'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Kandy',
+                      child: Text('Kandy'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Kegalle',
+                      child: Text('Kegalle'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Kilinochchi',
+                      child: Text('Kilinochchi'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Kurunegala',
+                      child: Text('Kurunegala'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Mannar',
+                      child: Text('Mannar'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Matale',
+                      child: Text('Matale'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Matara',
+                      child: Text('Matara'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Monaragala',
+                      child: Text('Monaragala'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Mullaitivu',
+                      child: Text('Mullaitivu'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Nuwara Eliya',
+                      child: Text('Nuwara Eliya'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Polonnaruwa',
+                      child: Text('Polonnaruwa'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Puttalam',
+                      child: Text('Puttalam'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Ratnapura',
+                      child: Text('Ratnapura'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Trincomalee',
+                      child: Text('Trincomalee'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Vavuniya',
+                      child: Text('Vavuniya'),
+                    ),
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Select your district',
+                  ),
+                   // Adjust the height as needed
+                ),
                     SizedBox(height: 8),
                     Text(
                       'Radius (km)',

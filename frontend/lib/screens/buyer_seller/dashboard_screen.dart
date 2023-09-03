@@ -27,7 +27,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               backgroundColor: Color.fromARGB(255, 223, 182, 49),
               radius: 25,
               backgroundImage: AssetImage('assets/images/market_icon.png'),
-              
             ),
             const SizedBox(
               width: 30,
@@ -43,7 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ),
                 Text(
-                  'B MASTER',
+                  'BANANA XPERT',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,

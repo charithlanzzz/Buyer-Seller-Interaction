@@ -35,7 +35,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
               children: const [
                 Text('Disease Identification'),
                 Text(
-                  'B MASTER',
+                  'BANANA XPERT',
                   style: TextStyle(fontSize: 12),
                 ),
               ],

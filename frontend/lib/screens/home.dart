@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  'B MASTER',
+                  'BANANA XPERT',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,
@@ -399,7 +399,8 @@ class _HomeState extends State<Home> {
                                 // );
                               },
                               child: Card(
-                                color: Color.fromARGB(255, 223, 182, 49), // Add your desired color here
+                                color: Color.fromARGB(255, 223, 182,
+                                    49), // Add your desired color here
                                 child: Container(
                                   width: 120,
                                   height: 120,

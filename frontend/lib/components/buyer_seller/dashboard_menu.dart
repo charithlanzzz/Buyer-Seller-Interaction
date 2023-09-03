@@ -11,8 +11,9 @@ class DashboardMenu extends StatelessWidget {
     return Center(
       child: Container(
         child: Column(
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Vertically center the content
           children: [
-            const SizedBox(height: 15),
             ClipRRect(
               borderRadius: BorderRadius.circular(
                   10.0), // Set the border radius value here
@@ -27,12 +28,12 @@ class DashboardMenu extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 16),
             const Text(
               'Who Are You ?',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20), // Adjust the spacing as needed
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -48,7 +49,7 @@ class DashboardMenu extends StatelessWidget {
                     color: Color.fromARGB(255, 223, 182, 49),
                     child: Container(
                       width: 120,
-                      height: 120,
+                      height: 120, // Reduce the height of the Card
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -75,7 +76,7 @@ class DashboardMenu extends StatelessWidget {
                     color: Color.fromARGB(255, 223, 182, 49),
                     child: Container(
                       width: 120,
-                      height: 120,
+                      height: 120, // Reduce the height of the Card
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -92,6 +93,15 @@ class DashboardMenu extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 20), // Add some space before the text
+            Text(
+              'Explore our platform to connect with farmers and buyers, and discover fresh and high-quality banana products.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center, // Center the text alignment
+            )
           ],
         ),
       ),

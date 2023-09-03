@@ -44,7 +44,7 @@ class _BuyerInputState extends State<BuyerInput> {
                 children: [
                   CircularProgressIndicator(
                     strokeWidth: 10.0,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                    valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 236, 194, 25)),
                   ),
                   SizedBox(height: 16),
                   Text(
@@ -62,7 +62,7 @@ class _BuyerInputState extends State<BuyerInput> {
       );
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
-      // final url = Uri.parse('http://127.0.0.1:5000/process_input');
+      //final url = Uri.parse('http://127.0.0.1:5000/process_input');
       final url = Uri.parse('https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
       final response = await http.post(
         url,

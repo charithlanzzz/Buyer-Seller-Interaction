@@ -43,7 +43,7 @@ class _FarmerInputScreenState extends State<FarmerInputScreen> {
                   ),
                 ),
                 Text(
-                  'B MASTER',
+                  'BANANA XPERT',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,

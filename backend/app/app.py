@@ -85,7 +85,8 @@ def process_input():
                 matching_stakeholders.append({
                     "id": row[id_column],
                     "name": row[stakeholder_name],
-                    "contact_number": row[contact_number]
+                    "contact_number": row[contact_number],
+                    "location_name": row['location_name']
                 })
 
             # Recommendation plan for buyers based on product type
