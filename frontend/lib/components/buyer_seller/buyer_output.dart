@@ -50,7 +50,7 @@ class BuyerOutput extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 14, // Customize the font size
                                   color:
-                                      Colors.blue, // Customize the text color
+                                      Color.fromARGB(255, 73, 104, 225), // Customize the text color
                                 ),
                               ),
                             ],
@@ -68,7 +68,12 @@ class BuyerOutput extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: responseData['recommendation_plan']
-                    .map<Widget>((recommendation) => Text('- $recommendation'))
+                    .map<Widget>((recommendation) => Text(
+                          '- $recommendation',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 11, 30, 107), // Change this to your desired color
+                          ),
+                        ))
                     .toList(),
               ),
           ],

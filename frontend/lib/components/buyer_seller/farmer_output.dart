@@ -10,7 +10,7 @@ class FarmerOutput extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 223, 182, 49),
-        title: Text('Farmer Output'),
+        title: Text('Best Wholesale Buyers'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -18,7 +18,7 @@ class FarmerOutput extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Matching Stakeholders:',
+              'The Best Wholesale Buyers According Your Requirements:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),

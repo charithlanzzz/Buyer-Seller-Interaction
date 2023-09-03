@@ -22,7 +22,7 @@ class _BuyerInputState extends State<BuyerInput> {
 
   List<String> _productTypes = [
     'Banana',
-    'Banana Leaves',
+    'Leaves',
     'Banana Blossom',
     'Banana Stem',
     'Banana Peel',
