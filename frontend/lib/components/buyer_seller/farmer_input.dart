@@ -44,7 +44,7 @@ class _FarmerInputState extends State<FarmerInput> {
                 children: [
                   CircularProgressIndicator(
                     strokeWidth: 10.0,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                    valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 236, 194, 25)),
                   ),
                   SizedBox(height: 16),
                   Text(

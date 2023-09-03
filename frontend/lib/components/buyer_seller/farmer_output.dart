@@ -9,6 +9,7 @@ class FarmerOutput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 223, 182, 49),
         title: Text('Farmer Output'),
       ),
       body: SingleChildScrollView(
@@ -24,41 +25,44 @@ class FarmerOutput extends StatelessWidget {
             if (responseData['matching_stakeholders'] != null &&
                 responseData['matching_stakeholders'].isNotEmpty)
               Column(
-    children: responseData['matching_stakeholders']
-        .map<Widget>((stakeholder) => ListTile(
-              title: Text(
-                stakeholder['name'].toString(),
-                style: TextStyle(
-                  fontSize: 16, // Customize the font size
-                  fontWeight: FontWeight.bold, // Apply bold font weight
-                ),
+                children: responseData['matching_stakeholders']
+                    .map<Widget>((stakeholder) => ListTile(
+                          title: Text(
+                            stakeholder['name'].toString(),
+                            style: TextStyle(
+                              fontSize: 16, // Customize the font size
+                              fontWeight:
+                                  FontWeight.bold, // Apply bold font weight
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                stakeholder['contact_number'].toString(),
+                                style: TextStyle(
+                                  fontSize: 14, // Customize the font size
+                                  color:
+                                      Colors.grey, // Customize the text color
+                                ),
+                              ),
+                              Text(
+                                stakeholder['location_name'].toString(),
+                                style: TextStyle(
+                                  fontSize: 14, // Customize the font size
+                                  color:
+                                      Colors.blue, // Customize the text color
+                                ),
+                              ),
+                            ],
+                          ),
+                        ))
+                    .toList(),
               ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stakeholder['contact_number'].toString(),
-                    style: TextStyle(
-                      fontSize: 14, // Customize the font size
-                      color: Colors.grey, // Customize the text color
-                    ),
-                  ),
-                  Text(
-                    stakeholder['location_name'].toString(),
-                    style: TextStyle(
-                      fontSize: 14, // Customize the font size
-                      color: Colors.blue, // Customize the text color
-                    ),
-                  ),
-                ],
-              ),
-            ))
-        .toList(),
-  ),
             if (responseData['matching_stakeholders'] == null ||
                 responseData['matching_stakeholders'].isEmpty)
               Text(
-                'No record found',
+                'No matching stakeholders found based on the given requirements',
                 style: TextStyle(fontSize: 16),
               ),
           ],
