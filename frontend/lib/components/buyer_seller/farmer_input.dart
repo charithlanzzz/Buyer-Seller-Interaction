@@ -22,7 +22,7 @@ class _FarmerInputState extends State<FarmerInput> {
 
   List<String> _productTypes = [
     'Banana',
-    'Banana Leaves',
+    'Leaves',
     'Banana Blossom',
     'Banana Stem',
     'Banana Peel',

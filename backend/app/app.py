@@ -4,10 +4,8 @@ from flask_cors import CORS
 from geopy.distance import geodesic
 import pandas as pd
 
-
 app = Flask(__name__)
 CORS(app)
-
 
 # Assuming the CSV files are placed in the 'data' directory
 buyer_data_path = os.path.join(os.path.dirname(__file__), 'data', 'buyer_data.csv')
@@ -16,7 +14,6 @@ seller_data_path = os.path.join(os.path.dirname(__file__), 'data', 'seller_data.
 # Read the buyer and seller datasets from CSV files
 buyer_data = pd.read_csv(buyer_data_path)
 seller_data = pd.read_csv(seller_data_path)
-
 
 @app.route('/')
 def hello():
