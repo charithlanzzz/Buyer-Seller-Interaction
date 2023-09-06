@@ -25,6 +25,7 @@ def process_input():
 
     user_type = data['user_type']
     product_type = data['product_type']
+    banana_type = data.get('banana_type', 'Seeni')
     min_price = float(data['min_price'])
     max_price = float(data['max_price'])
     min_quantity = int(data['min_quantity'])
@@ -53,7 +54,8 @@ def process_input():
                          (data['price'] <= max_price) &
                          (data['quantity'] >= min_quantity) &
                          (data['quantity'] <= max_quantity) &
-                         (data['product_type'] == product_type)].copy()
+                         (data['product_type'] == product_type) &
+                         (data['banana_type'] == banana_type)].copy()
 
     # Check if there are any matching stakeholders
     if not filtered_data.empty:

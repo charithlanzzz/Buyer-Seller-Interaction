@@ -13,6 +13,7 @@ class _BuyerInputState extends State<BuyerInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _selectedProductType = 'Banana';
+  String _selectedBananaType = 'Seeni'; // Selected banana type
   String? _minQuantity;
   String? _maxQuantity;
   String? _minPrice;
@@ -26,6 +27,15 @@ class _BuyerInputState extends State<BuyerInput> {
     'Banana Blossom',
     'Banana Stem',
     'Banana Peel',
+  ];
+
+  // Add banana types
+  List<String> _bananaTypes = [
+    'Ambum',
+    'Kolikuttu',
+    'Seeni',
+    'Aanamalu',
+    'Rath Kesel',
   ];
 
   void _submitForm() async {
@@ -44,7 +54,8 @@ class _BuyerInputState extends State<BuyerInput> {
                 children: [
                   CircularProgressIndicator(
                     strokeWidth: 10.0,
-                    valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 236, 194, 25)),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Color.fromARGB(255, 236, 194, 25)),
                   ),
                   SizedBox(height: 16),
                   Text(
@@ -62,14 +73,16 @@ class _BuyerInputState extends State<BuyerInput> {
       );
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
-      //final url = Uri.parse('http://127.0.0.1:5000/process_input');
-      final url = Uri.parse('https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
+      final url = Uri.parse('http://127.0.0.1:5000/process_input');
+      // final url = Uri.parse(
+      //     'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "user_type": "buyer",
           "product_type": _selectedProductType,
+          "banana_type": _selectedBananaType,
           "min_quantity": _minQuantity,
           "max_quantity": _maxQuantity,
           "min_price": _minPrice,
@@ -141,26 +154,49 @@ class _BuyerInputState extends State<BuyerInput> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Product Type',
+                  'Select Product Type',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                DropdownButton<String>(
-                  value: _selectedProductType,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _selectedProductType = newValue!;
-                    });
-                  },
-                  items: _productTypes.map((productType) {
-                    return DropdownMenuItem<String>(
-                      value: productType,
-                      child: Text(productType),
-                    );
-                  }).toList(),
+                Row(
+                  children: [
+                    DropdownButton<String>(
+                      value: _selectedProductType,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedProductType = newValue!;
+                          // Reset the selected banana type when changing the product type
+                          _selectedBananaType = 'Seeni'; // Reset to 'Seeni'
+                        });
+                      },
+                      items: _productTypes.map((productType) {
+                        return DropdownMenuItem<String>(
+                          value: productType,
+                          child: Text(productType),
+                        );
+                      }).toList(),
+                    ),
+                    SizedBox(width: 8),
+                    // Show the banana type dropdown only when "Banana" is selected
+                    if (_selectedProductType == 'Banana')
+                      DropdownButton<String>(
+                        value: _selectedBananaType,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedBananaType = newValue!;
+                          });
+                        },
+                        items: _bananaTypes.map((bananaType) {
+                          return DropdownMenuItem<String>(
+                            value: bananaType,
+                            child: Text(bananaType),
+                          );
+                        }).toList(),
+                      ),
+                  ],
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Quantity',
+                  'Quantity(kg)',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -206,7 +242,7 @@ class _BuyerInputState extends State<BuyerInput> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Price Range',
+                  'Price Range (Per kg)',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -373,17 +409,17 @@ class _BuyerInputState extends State<BuyerInput> {
                   decoration: InputDecoration(
                     hintText: 'Select your district',
                   ),
-                   // Adjust the height as needed
+                  // Adjust the height as needed
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Radius',
+                  'Distance',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter the radius';
+                      return 'Please enter the distance';
                     }
                     return null;
                   },

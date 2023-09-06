@@ -1,106 +1,106 @@
-seller_id,seller_name,price,product_type,quantity,location_name,latitude,longitude,contact_no
-1,Dilshan Perera,260,Banana Blossom,1200,Colombo,6.9271,79.8612,756985421
-2,Priyanthi Silva,390,Banana,800,Galle,6.0329,80.2168,778963541
-3,Nuwan Bandara,1200,Banana Stem,800,Kandy,7.2906,80.6337,763259841
-4,Malini Jayawardena,340,Banana Peel,200,Matara,5.9496,80.5469,779863542
-5,Chaminda Fernando,1050,Banana Stem,1300,Jaffna,9.6615,80.0255,769523418
-6,Piyumi Wijesinghe,470,Banana,300,Anuradhapura,8.3114,80.4037,756985472
-7,Malitha de Silva,580,Leaves,400,Badulla,6.9934,81.055,778965231
-8,Thilak Ranasinghe,1100,Banana Stem,100,Nuwara Eliya,6.9497,80.7891,714598632
-9,Asanka Gunaratne,1300,Banana Stem,1500,Ratnapura,6.7056,80.3847,769856324
-10,Chathurika Ratnayake,220,Banana Blossom,400,Trincomalee,8.5874,81.2152,756985473
-11,Sanjeewa Rajapaksa,410,Banana Peel,900,Kurunegala,7.4818,80.3609,779863541
-12,Maheshi Weerasinghe,430,Banana Peel,500,Ampara,7.3018,81.6747,714563298
-13,Chandana Dissanayake,280,Banana Blossom,600,Polonnaruwa,7.9403,81.0188,763259418
-14,Renuka Bandara,450,Banana,800,Kalutara,6.5854,79.9607,778965234
-15,Chaminda Kumara,320,Banana Peel,1100,Hambantota,6.1429,81.1212,763259841
-16,Nayana Fernando,410,Banana,1100,Kilinochchi,9.3803,80.377,756985472
-17,Chandana Silva,1250,Banana Stem,1300,Mannar,8.981,79.9044,779863541
-18,Samantha Fernando,1150,Banana Stem,700,Puttalam,8.0408,79.8394,714598632
-19,Prasanna Jayasuriya,710,Leaves,900,Vavuniya,8.7542,80.4982,769856324
-20,Kamal Wijeratne,540,Leaves,700,Mullaitivu,9.2671,80.8142,756985412
-21,Nirosha de Silva,240,Banana Blossom,100,Batticaloa,7.7249,81.6967,778965231
-22,Dilhani Silva,480,Banana Peel,200,Monaragala,6.8906,81.3454,763259418
-23,Janitha Karunaratne,320,Banana,600,Matale,7.4675,80.6234,756985473
-24,Anusha Gunasekara,630,Leaves,300,Kegalle,7.2513,80.3464,779863542
-25,Manori Perera,270,Banana Blossom,800,Hambantota,6.1429,81.1212,714563298
-26,Kamal Perera,370,Banana,900,Ratnapura,6.7056,80.3847,763259841
-27,Nayani Gunaratne,750,Leaves,200,Gampaha,7.084,80.0098,756985412
-28,Dilum Fernando,290,Banana Blossom,200,Colombo,6.9271,79.8612,769856324
-29,Nadeeka Jayawardena,490,Banana,500,Kalutara,6.5854,79.9607,756985472
-30,Kusal Perera,480,Banana,700,Galle,6.0329,80.2168,778965231
-31,Chamara Perera,250,Banana Blossom,300,Kurunegala,7.4818,80.3609,769852413
-32,Prasanna Silva,400,Banana,100,Kandy,7.2906,80.6337,778963541
-33,Ruwan Rajapaksa,400,Banana,600,Galle,6.0329,80.2168,756985421
-34,Nimesha Bandara,360,Banana Peel,400,Matara,5.9496,80.5469,779863542
-35,Supun Kumara,600,Leaves,900,Colombo,6.9271,79.8612,763259841
-36,Tharindu Perera,380,Banana,500,Gampaha,7.084,80.0098,778963541
-37,Udaya Silva,230,Banana Blossom,300,Anuradhapura,8.3114,80.4037,763259487
-38,Sameera Jayasuriya,430,Banana,400,Badulla,6.9934,81.055,756984523
-39,Malitha Rajapakse,1220,Banana Stem,600,Ratnapura,6.7056,80.3847,779856234
-40,Dushantha Fernando,370,Banana Peel,800,Kandy,7.2906,80.6337,769856231
-41,Nilmini Gunaratne,680,Leaves,100,Kalutara,6.5854,79.9607,779856321
-42,Sashika Perera,760,Leaves,600,Matara,5.9496,80.5469,763258974
-43,Shashi Wijesinghe,310,Banana Blossom,100,Colombo,6.9271,79.8612,778965432
-44,Rajitha Silva,450,Banana Peel,500,Gampaha,7.084,80.0098,763258947
-45,Thilani Jayawardena,350,Banana,700,Anuradhapura,8.3114,80.4037,756985471
-46,Sampath Kumara,270,Banana Blossom,900,Badulla,6.9934,81.055,778965412
-47,Gayan Fernando,460,Banana Peel,400,Galle,6.0329,80.2168,779865432
-48,Uditha Perera,1400,Banana Stem,200,Jaffna,9.6615,80.0255,756985472
-49,Tharaka Bandara,1370,Banana Stem,500,Kandy,7.2906,80.6337,763259841
-50,Damitha Silva,390,Banana,800,Ampara,7.3018,81.6747,756985473
-51,Hiruna Perera,270,Banana,600,Ragama,7.028,79.923,785984658
-52,Sahan Silva,280,Banana,400,Kadawatha,7.0047,79.9542,785988454
-53,Thimira Gayan,320,Banana,200,Mahabage,7.0252,79.9011,746455558
-54,Kasun Ranasinghe,360,Banana,900,Kandana,7.0478,79.897,785545258
-55,Pawan Perera,410,Banana,200,Ragama,7.028,79.923,747884658
-56,Kusal Silva,390,Banana Peel,500,Dehiwala,6.8301,79.8801,771234567
-57,Nilmini Jayasinghe,250,Banana Blossom,300,Sri Jayawardenepura Kotte,6.8868,79.9187,712345678
-58,Rajitha Perera,290,Banana Blossom,700,Negombo,7.2008,79.8737,763456789
-59,Chamika Karunaratne,580,Leaves,800,Wattala,6.9907,79.8932,724567890
-60,Udara Bandara,220,Banana Blossom,100,Gampaha,7.084,80.0098,705678901
-61,Thilini Ratnayake,450,Banana,100,Kelaniya,6.9518,79.9133,756789012
-62,Rukshan Wijesinghe,280,Banana Blossom,300,Kalutara,6.5854,79.9607,737890123
-63,Samanthi Gunawardena,1200,Banana Stem,100,Panadura,6.7106,79.9074,778901234
-64,Ishan Perera,260,Banana Blossom,400,Beruwala,6.4738,79.992,719012345
-65,Anushka Rajapaksa,480,Banana,800,Matugama,6.5219,80.1137,760123456
-66,Malintha Fernando,1250,Banana Stem,700,Kandy,7.2906,80.6337,721234567
-67,Dilshan Wickramaratne,620,Leaves,1300,Peradeniya,7.2699,80.5938,702345678
-68,Nayomi Jayawardena,1100,Banana Stem,600,Gampola,7.1635,80.5702,753456789
-69,Indrajith Silva,1350,Banana Stem,1100,Katugastota,7.336,80.6214,754567890
-70,Thilini Perera,240,Banana Blossom,400,Nuwara Eliya,6.9497,80.7891,775678901
-71,Sampath Rathnayake,430,Banana Peel,500,Hatton,6.9003,80.5966,716789012
-72,Hasitha Dissanayake,1300,Banana Stem,500,Talawakele,6.9388,80.6632,767890123
-73,Anjali Wijeratne,270,Banana Blossom,100,Matale,7.4675,80.6234,728901234
-74,Dinesh Ranaweera,710,Leaves,600,Dambulla,7.8742,80.6511,709012345
-75,Gayathri Gunasekara,310,Banana Blossom,1300,Kurunegala,7.4818,80.3609,750123456
-76,Roshan Kumara,270,Banana Blossom,800,Kuliyapitiya,7.4721,80.0446,741234567
-77,Chamari de Silva,290,Banana Blossom,1200,Chilaw,7.562,79.8017,772345678
-78,Niroshan Gunathilaka,230,Banana Blossom,900,Puttalam,8.0408,79.8394,713456789
-79,Janani Bandara,490,Banana,700,Anuradhapura,8.3114,80.4037,764567890
-80,Mahesh Ranasinghe,550,Leaves,1300,Polonnaruwa,7.9403,81.0188,725678901
-81,Haritha Perera,1150,Banana Stem,600,Trincomalee,8.5874,81.2152,706789012
-82,Shashika Silva,300,Banana Blossom,900,Batticaloa,7.7249,81.6967,757890123
-83,Nipuni Jayasuriya,400,Banana Peel,100,Ampara,7.3018,81.6747,738901234
-84,Chinthaka Perera,420,Banana,700,Jaffna,9.6615,80.0255,779012345
-85,Sandali Liyanage,1400,Banana Stem,800,Mannar,8.981,79.9044,710123456
-86,Lahiru Fernando,460,Banana Peel,200,Vavuniya,8.7542,80.4982,761234567
-87,Amali Perera,330,Banana Blossom,400,Mullaitivu,9.2671,80.8142,722345678
-88,Tharindu Jayawardena,320,Banana Blossom,300,Kilinochchi,9.3803,80.377,703456789
-89,Manjula Wijewardena,680,Leaves,800,Hambantota,6.1429,81.1212,754567890
-90,Dinusha Karunaratne,280,Banana Blossom,1200,Tangalle,6.0243,80.7941,745678901
-91,Tharaka Bandara,290,Banana Blossom,100,Matara,5.9496,80.5469,776789012
-92,Madushanka Silva,1320,Banana Stem,700,Weligama,5.9774,80.4288,717890123
-93,Samadhi Ranaweera,310,Banana Blossom,500,Galle,6.0329,80.2168,768901234
-94,Nishantha Gunaratne,730,Leaves,1200,Hikkaduwa,6.1395,80.1063,729012345
-95,Dilrukshi Bandara,490,Banana Peel,400,Ratnapura,6.7056,80.3847,700123456
-96,Suranga Fernando,390,Banana,500,Balangoda,6.6669,80.7048,751234567
-97,Nisal Perera,1270,Banana Stem,700,Kegalle,7.2513,80.3464,742345678
-98,Tharushi Jayasinghe,340,Banana Blossom,600,Badulla,6.9934,81.055,773456789
-99,Ramesh Rajapakse,310,Banana Blossom,900,Bandarawela,6.8259,80.9982,714567890
-100,Samitha Silva,300,Banana Blossom,600,Ella,6.8667,81.0466,765678901
-101,Kanchana Ratnayake,1330,Banana Stem,200,Monaragala,6.8906,81.3454,726789012
-102,Dineth Weerasinghe,280,Banana Blossom,800,Buttala,6.7589,81.2491,707890123
-103,Anuradhi Perera,290,Banana Blossom,800,Embilipitiya,6.3162,80.8433,758901234
-104,Eranga Kumara,270,Banana Blossom,1200,Rakwana,6.4647,80.616,749012345
-105,Dilini Jayawardena,1250,Banana Stem,1300,Embilipitiya,6.3162,80.8433,770123456
+seller_id,seller_name,price,product_type,banana_type,quantity,location_name,latitude,longitude,contact_no
+1,Dilshan Perera,260,Banana Blossom,,1200,Colombo,6.9271,79.8612,756985421
+2,Priyanthi Silva,390,Banana,Seeni,800,Galle,6.0329,80.2168,778963541
+3,Nuwan Bandara,1200,Banana Stem,,800,Kandy,7.2906,80.6337,763259841
+4,Malini Jayawardena,340,Banana Peel,,200,Matara,5.9496,80.5469,779863542
+5,Chaminda Fernando,1050,Banana Stem,,1300,Jaffna,9.6615,80.0255,769523418
+6,Piyumi Wijesinghe,470,Banana,Kolikuttu,300,Anuradhapura,8.3114,80.4037,756985472
+7,Malitha de Silva,580,Leaves,,400,Badulla,6.9934,81.055,778965231
+8,Thilak Ranasinghe,1100,Banana Stem,,100,Nuwara Eliya,6.9497,80.7891,714598632
+9,Asanka Gunaratne,1300,Banana Stem,,1500,Ratnapura,6.7056,80.3847,769856324
+10,Chathurika Ratnayake,220,Banana Blossom,,400,Trincomalee,8.5874,81.2152,756985473
+11,Sanjeewa Rajapaksa,410,Banana Peel,,900,Kurunegala,7.4818,80.3609,779863541
+12,Maheshi Weerasinghe,430,Banana Peel,,500,Ampara,7.3018,81.6747,714563298
+13,Chandana Dissanayake,280,Banana Blossom,,600,Polonnaruwa,7.9403,81.0188,763259418
+14,Renuka Bandara,450,Banana,Seeni,800,Kalutara,6.5854,79.9607,778965234
+15,Chaminda Kumara,320,Banana Peel,,1100,Hambantota,6.1429,81.1212,763259841
+16,Nayana Fernando,410,Banana,Ambum,1100,Kilinochchi,9.3803,80.377,756985472
+17,Chandana Silva,1250,Banana Stem,,1300,Mannar,8.981,79.9044,779863541
+18,Samantha Fernando,1150,Banana Stem,,700,Puttalam,8.0408,79.8394,714598632
+19,Prasanna Jayasuriya,710,Leaves,,900,Vavuniya,8.7542,80.4982,769856324
+20,Kamal Wijeratne,540,Leaves,,700,Mullaitivu,9.2671,80.8142,756985412
+21,Nirosha de Silva,240,Banana Blossom,,100,Batticaloa,7.7249,81.6967,778965231
+22,Dilhani Silva,480,Banana Peel,,200,Monaragala,6.8906,81.3454,763259418
+23,Janitha Karunaratne,320,Banana,Aanamalu,600,Matale,7.4675,80.6234,756985473
+24,Anusha Gunasekara,630,Leaves,,300,Kegalle,7.2513,80.3464,779863542
+25,Manori Perera,270,Banana Blossom,,800,Hambantota,6.1429,81.1212,714563298
+26,Kamal Perera,370,Banana,Rath Kesel,900,Ratnapura,6.7056,80.3847,763259841
+27,Nayani Gunaratne,750,Leaves,,200,Gampaha,7.084,80.0098,756985412
+28,Dilum Fernando,290,Banana Blossom,,200,Colombo,6.9271,79.8612,769856324
+29,Nadeeka Jayawardena,490,Banana,Kolikuttu,500,Kalutara,6.5854,79.9607,756985472
+30,Kusal Perera,480,Banana,Kolikuttu,700,Galle,6.0329,80.2168,778965231
+31,Chamara Perera,250,Banana Blossom,,300,Kurunegala,7.4818,80.3609,769852413
+32,Prasanna Silva,400,Banana,Seeni,100,Kandy,7.2906,80.6337,778963541
+33,Ruwan Rajapaksa,400,Banana,Aanamalu,600,Galle,6.0329,80.2168,756985421
+34,Nimesha Bandara,360,Banana Peel,,400,Matara,5.9496,80.5469,779863542
+35,Supun Kumara,600,Leaves,,900,Colombo,6.9271,79.8612,763259841
+36,Tharindu Perera,380,Banana,Seeni,500,Gampaha,7.084,80.0098,778963541
+37,Udaya Silva,230,Banana Blossom,,300,Anuradhapura,8.3114,80.4037,763259487
+38,Sameera Jayasuriya,430,Banana,Aanamalu,400,Badulla,6.9934,81.055,756984523
+39,Malitha Rajapakse,1220,Banana Stem,,600,Ratnapura,6.7056,80.3847,779856234
+40,Dushantha Fernando,370,Banana Peel,,800,Kandy,7.2906,80.6337,769856231
+41,Nilmini Gunaratne,680,Leaves,,100,Kalutara,6.5854,79.9607,779856321
+42,Sashika Perera,760,Leaves,,600,Matara,5.9496,80.5469,763258974
+43,Shashi Wijesinghe,310,Banana Blossom,,100,Colombo,6.9271,79.8612,778965432
+44,Rajitha Silva,450,Banana Peel,,500,Gampaha,7.084,80.0098,763258947
+45,Thilani Jayawardena,350,Banana,Aanamalu,700,Anuradhapura,8.3114,80.4037,756985471
+46,Sampath Kumara,270,Banana Blossom,,900,Badulla,6.9934,81.055,778965412
+47,Gayan Fernando,460,Banana Peel,,400,Galle,6.0329,80.2168,779865432
+48,Uditha Perera,1400,Banana Stem,,200,Jaffna,9.6615,80.0255,756985472
+49,Tharaka Bandara,1370,Banana Stem,,500,Kandy,7.2906,80.6337,763259841
+50,Damitha Silva,390,Banana,Rath Kesel,800,Ampara,7.3018,81.6747,756985473
+51,Hiruna Perera,270,Banana,Ambum,600,Ragama,7.028,79.923,785984658
+52,Sahan Silva,280,Banana,Seeni,400,Kadawatha,7.0047,79.9542,785988454
+53,Thimira Gayan,320,Banana,Rath Kesel,200,Mahabage,7.0252,79.9011,746455558
+54,Kasun Ranasinghe,360,Banana,Seeni,900,Kandana,7.0478,79.897,785545258
+55,Pawan Perera,410,Banana,Seeni,200,Ragama,7.028,79.923,747884658
+56,Kusal Silva,390,Banana Peel,,500,Dehiwala,6.8301,79.8801,771234567
+57,Nilmini Jayasinghe,250,Banana Blossom,,300,Sri Jayawardenepura Kotte,6.8868,79.9187,712345678
+58,Rajitha Perera,290,Banana Blossom,,700,Negombo,7.2008,79.8737,763456789
+59,Chamika Karunaratne,580,Leaves,,800,Wattala,6.9907,79.8932,724567890
+60,Udara Bandara,220,Banana Blossom,,100,Gampaha,7.084,80.0098,705678901
+61,Thilini Ratnayake,450,Banana,Seeni,100,Kelaniya,6.9518,79.9133,756789012
+62,Rukshan Wijesinghe,280,Banana Blossom,,300,Kalutara,6.5854,79.9607,737890123
+63,Samanthi Gunawardena,1200,Banana Stem,,100,Panadura,6.7106,79.9074,778901234
+64,Ishan Perera,260,Banana Blossom,,400,Beruwala,6.4738,79.992,719012345
+65,Anushka Rajapaksa,480,Banana,Rath Kesel,800,Matugama,6.5219,80.1137,760123456
+66,Malintha Fernando,1250,Banana Stem,,700,Kandy,7.2906,80.6337,721234567
+67,Dilshan Wickramaratne,620,Leaves,,1300,Peradeniya,7.2699,80.5938,702345678
+68,Nayomi Jayawardena,1100,Banana Stem,,600,Gampola,7.1635,80.5702,753456789
+69,Indrajith Silva,1350,Banana Stem,,1100,Katugastota,7.336,80.6214,754567890
+70,Thilini Perera,240,Banana Blossom,,400,Nuwara Eliya,6.9497,80.7891,775678901
+71,Sampath Rathnayake,430,Banana Peel,,500,Hatton,6.9003,80.5966,716789012
+72,Hasitha Dissanayake,1300,Banana Stem,,500,Talawakele,6.9388,80.6632,767890123
+73,Anjali Wijeratne,270,Banana Blossom,,100,Matale,7.4675,80.6234,728901234
+74,Dinesh Ranaweera,710,Leaves,,600,Dambulla,7.8742,80.6511,709012345
+75,Gayathri Gunasekara,310,Banana Blossom,,1300,Kurunegala,7.4818,80.3609,750123456
+76,Roshan Kumara,270,Banana Blossom,,800,Kuliyapitiya,7.4721,80.0446,741234567
+77,Chamari de Silva,290,Banana Blossom,,1200,Chilaw,7.562,79.8017,772345678
+78,Niroshan Gunathilaka,230,Banana Blossom,,900,Puttalam,8.0408,79.8394,713456789
+79,Janani Bandara,490,Banana,Kolikuttu,700,Anuradhapura,8.3114,80.4037,764567890
+80,Mahesh Ranasinghe,550,Leaves,,1300,Polonnaruwa,7.9403,81.0188,725678901
+81,Haritha Perera,1150,Banana Stem,,600,Trincomalee,8.5874,81.2152,706789012
+82,Shashika Silva,300,Banana Blossom,,900,Batticaloa,7.7249,81.6967,757890123
+83,Nipuni Jayasuriya,400,Banana Peel,,100,Ampara,7.3018,81.6747,738901234
+84,Chinthaka Perera,420,Banana,Seeni,700,Jaffna,9.6615,80.0255,779012345
+85,Sandali Liyanage,1400,Banana Stem,,800,Mannar,8.981,79.9044,710123456
+86,Lahiru Fernando,460,Banana Peel,,200,Vavuniya,8.7542,80.4982,761234567
+87,Amali Perera,330,Banana Blossom,,400,Mullaitivu,9.2671,80.8142,722345678
+88,Tharindu Jayawardena,320,Banana Blossom,,300,Kilinochchi,9.3803,80.377,703456789
+89,Manjula Wijewardena,680,Leaves,,800,Hambantota,6.1429,81.1212,754567890
+90,Dinusha Karunaratne,280,Banana Blossom,,1200,Tangalle,6.0243,80.7941,745678901
+91,Tharaka Bandara,290,Banana Blossom,,100,Matara,5.9496,80.5469,776789012
+92,Madushanka Silva,1320,Banana Stem,,700,Weligama,5.9774,80.4288,717890123
+93,Samadhi Ranaweera,310,Banana Blossom,,500,Galle,6.0329,80.2168,768901234
+94,Nishantha Gunaratne,730,Leaves,,1200,Hikkaduwa,6.1395,80.1063,729012345
+95,Dilrukshi Bandara,490,Banana Peel,,400,Ratnapura,6.7056,80.3847,700123456
+96,Suranga Fernando,390,Banana,Kolikuttu,500,Balangoda,6.6669,80.7048,751234567
+97,Nisal Perera,1270,Banana Stem,,700,Kegalle,7.2513,80.3464,742345678
+98,Tharushi Jayasinghe,340,Banana Blossom,,600,Badulla,6.9934,81.055,773456789
+99,Ramesh Rajapakse,310,Banana Blossom,,900,Bandarawela,6.8259,80.9982,714567890
+100,Samitha Silva,300,Banana Blossom,,600,Ella,6.8667,81.0466,765678901
+101,Kanchana Ratnayake,1330,Banana Stem,,200,Monaragala,6.8906,81.3454,726789012
+102,Dineth Weerasinghe,280,Banana Blossom,,800,Buttala,6.7589,81.2491,707890123
+103,Anuradhi Perera,290,Banana Blossom,,800,Embilipitiya,6.3162,80.8433,758901234
+104,Eranga Kumara,270,Banana Blossom,,1200,Rakwana,6.4647,80.616,749012345
+105,Dilini Jayawardena,1250,Banana Stem,,1300,Embilipitiya,6.3162,80.8433,770123456
