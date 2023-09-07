@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:research_project/components/buyer_seller/buyer_input.dart';
 import 'package:research_project/screens/buyer_seller/buyer_input_screen.dart';
 import 'package:research_project/screens/buyer_seller/farmer_input_screen.dart';
 

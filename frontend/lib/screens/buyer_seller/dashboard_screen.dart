@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:research_project/components/buyer_seller/dashboard_menu.dart';
 
-import '../../components/disease_detection/disease_detection_menu.dart';
+
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);

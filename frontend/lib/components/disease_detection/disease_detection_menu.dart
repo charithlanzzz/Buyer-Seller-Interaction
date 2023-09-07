@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
-import '../../screens/disease_ditection/results_screen.dart';
+
 
 class DetectionMenu extends StatefulWidget {
   const DetectionMenu({Key? key}) : super(key: key);

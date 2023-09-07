@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:research_project/components/buyer_seller/dashboard_menu.dart';
 import 'package:research_project/components/buyer_seller/farmer_input.dart';
 
-import '../../components/disease_detection/disease_detection_menu.dart';
+
 
 class FarmerInputScreen extends StatefulWidget {
   const FarmerInputScreen({Key? key}) : super(key: key);

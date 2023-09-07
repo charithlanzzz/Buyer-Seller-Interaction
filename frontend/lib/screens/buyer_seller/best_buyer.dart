@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:research_project/components/buyer_seller/best_buyer.dart';
-import 'package:research_project/components/buyer_seller/dashboard_menu.dart';
 
-import '../../components/disease_detection/disease_detection_menu.dart';
 
 class BestBuyerScreen extends StatefulWidget {
   const BestBuyerScreen({Key? key}) : super(key: key);
