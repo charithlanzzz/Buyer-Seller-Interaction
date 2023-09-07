@@ -26,10 +26,10 @@ def process_input():
     user_type = data['user_type']
     product_type = data['product_type']
     banana_type = data.get('banana_type', 'Seeni')
-    min_price = float(data['min_price'])
-    max_price = float(data['max_price'])
-    min_quantity = int(data['min_quantity'])
-    max_quantity = int(data['max_quantity'])
+    min_price = float(data.get('min_price', 0))  # Default to 0 if not provided
+    max_price = float(data.get('max_price', float('inf')))  # Default to infinity if not provided
+    min_quantity = float(data.get('min_quantity', 0))
+    max_quantity = float(data.get('max_quantity', float('inf')))
     radius = float(data['radius'])
     location_name = data['location_name']
 
@@ -49,13 +49,17 @@ def process_input():
     else:
         return jsonify({"error": "Invalid user type entered."}), 400
 
-    # Filter data based on price, product type, and quantity range
-    filtered_data = data[(data['price'] >= min_price) &
-                         (data['price'] <= max_price) &
-                         (data['quantity'] >= min_quantity) &
-                         (data['quantity'] <= max_quantity) &
-                         (data['product_type'] == product_type) &
-                         (data['banana_type'] == banana_type)].copy()
+     # Filter data based on price, product type, and quantity range
+    if user_type == 'buyer':
+        filtered_data = data[(data['price'] <= max_price) &
+                             (data['quantity'] >= min_quantity) &
+                             (data['product_type'] == product_type) &
+                             (data['banana_type'] == banana_type)].copy()
+    else:
+        filtered_data = data[(data['price'] >= min_price) &
+                             (data['quantity'] <= max_quantity) &
+                             (data['product_type'] == product_type) &
+                             (data['banana_type'] == banana_type)].copy()
 
     # Check if there are any matching stakeholders
     if not filtered_data.empty:

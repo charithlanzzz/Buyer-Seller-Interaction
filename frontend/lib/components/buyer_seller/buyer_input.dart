@@ -84,8 +84,6 @@ class _BuyerInputState extends State<BuyerInput> {
           "product_type": _selectedProductType,
           "banana_type": _selectedBananaType,
           "min_quantity": _minQuantity,
-          "max_quantity": _maxQuantity,
-          "min_price": _minPrice,
           "max_price": _maxPrice,
           "radius": _radius,
           "location_name": _location,
@@ -219,25 +217,6 @@ class _BuyerInputState extends State<BuyerInput> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the max quantity';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            _maxQuantity = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Max Quantity',
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(height: 8),
@@ -247,25 +226,6 @@ class _BuyerInputState extends State<BuyerInput> {
                 ),
                 Row(
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the min price';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            _minPrice = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Min Price',
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8),
                     Expanded(
                       child: TextFormField(
                         validator: (value) {

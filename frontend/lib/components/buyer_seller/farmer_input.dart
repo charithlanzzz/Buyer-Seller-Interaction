@@ -74,7 +74,7 @@ class _FarmerInputState extends State<FarmerInput> {
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
       // final url = Uri.parse(
-          // 'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
+      // 'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
       final url = Uri.parse('http://127.0.0.1:5000/process_input');
       final response = await http.post(
         url,
@@ -83,10 +83,8 @@ class _FarmerInputState extends State<FarmerInput> {
           "user_type": "seller",
           "product_type": _selectedProductType,
           "banana_type": _selectedBananaType,
-          "min_quantity": _minQuantity,
           "max_quantity": _maxQuantity,
           "min_price": _minPrice,
-          "max_price": _maxPrice,
           "radius": _radius,
           "location_name": _location,
         }),
@@ -210,25 +208,6 @@ class _FarmerInputState extends State<FarmerInput> {
                           child: TextFormField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter the min quantity';
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                _minQuantity = value;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Min Quantity',
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
                                 return 'Please enter the max quantity';
                               }
                               return null;
@@ -239,7 +218,7 @@ class _FarmerInputState extends State<FarmerInput> {
                               });
                             },
                             decoration: InputDecoration(
-                              labelText: 'Max Quantity',
+                              labelText: 'Enter the max quantity you have',
                             ),
                           ),
                         ),
@@ -267,26 +246,7 @@ class _FarmerInputState extends State<FarmerInput> {
                               });
                             },
                             decoration: InputDecoration(
-                              labelText: 'Min Price',
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter the max price';
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                _maxPrice = value;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Max Price',
+                              labelText: 'Enter the minimum price per kilogram',
                             ),
                           ),
                         ),
@@ -416,7 +376,6 @@ class _FarmerInputState extends State<FarmerInput> {
                       decoration: InputDecoration(
                         hintText: 'Select your district',
                       ),
-                      // Adjust the height as needed
                     ),
                     SizedBox(height: 8),
                     Text(
@@ -437,7 +396,7 @@ class _FarmerInputState extends State<FarmerInput> {
                         });
                       },
                       decoration: InputDecoration(
-                        hintText: 'Enter the radius',
+                        hintText: 'Enter the distance',
                       ),
                     ),
                     SizedBox(height: 32),
