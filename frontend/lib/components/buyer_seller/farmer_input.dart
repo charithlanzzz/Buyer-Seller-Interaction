@@ -73,9 +73,9 @@ class _FarmerInputState extends State<FarmerInput> {
       );
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
-      // final url = Uri.parse(
-      // 'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
-      final url = Uri.parse('http://127.0.0.1:5000/process_input');
+       final url = Uri.parse(
+       'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
+      //final url = Uri.parse('http://127.0.0.1:5000/process_input');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -226,7 +226,7 @@ class _FarmerInputState extends State<FarmerInput> {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Price Range (Per kg)',
+                      'Price (Per kg)',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
