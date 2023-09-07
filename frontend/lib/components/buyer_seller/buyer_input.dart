@@ -15,8 +15,6 @@ class _BuyerInputState extends State<BuyerInput> {
   String _selectedProductType = 'Banana';
   String _selectedBananaType = 'Seeni'; // Selected banana type
   String? _minQuantity;
-  String? _maxQuantity;
-  String? _minPrice;
   String? _maxPrice;
   String? _location;
   String? _radius;
@@ -73,18 +71,18 @@ class _BuyerInputState extends State<BuyerInput> {
       );
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
+      final url = Uri.parse(
+          'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
       //final url = Uri.parse('http://127.0.0.1:5000/process_input');
-       final url = Uri.parse(
-           'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "user_type": "buyer",
-          "product_type": _selectedProductType,
-          "banana_type": _selectedBananaType,
-          "min_quantity": _minQuantity,
-          "max_price": _maxPrice,
+          "product_type":_selectedProductType, // Include the selected product type
+          "banana_type": _selectedBananaType, 
+          "max_quantity": _minQuantity,
+          "min_price": _maxPrice,
           "radius": _radius,
           "location_name": _location,
         }),
@@ -126,6 +124,14 @@ class _BuyerInputState extends State<BuyerInput> {
         print('Request failed with status: ${response.statusCode}');
       }
     }
+
+    // Access the input values after form submission
+    print("Selected Product Type: $_selectedProductType");
+    print("Selected Banana Type: $_selectedBananaType");
+    print("Max Quantity: $_minQuantity");
+    print("Min Price: $_maxPrice");
+    print("Location: $_location");
+    print("Radius: $_radius");
   }
 
   @override
@@ -134,276 +140,295 @@ class _BuyerInputState extends State<BuyerInput> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    'Banana Wholesale Buyer',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Text(
+                  'Banana Wholesale Buyer',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  'Enter your requirements to discover the best Farmers',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Select Product Type',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Row(
+              ),
+              SizedBox(height: 4),
+              Text(
+                'Enter your requirements to discover the best Farmers',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 16),
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DropdownButton<String>(
-                      value: _selectedProductType,
-                      onChanged: (newValue) {
+                    Text(
+                      'Select Product Type',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        DropdownButton<String>(
+                          value: _selectedProductType,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedProductType = newValue!;
+                              // Reset the selected banana type when changing the product type
+                              if (_selectedProductType != 'Banana') {
+                                _selectedBananaType =
+                                    ''; // Clear the banana type
+                              } else if (!_bananaTypes
+                                  .contains(_selectedBananaType)) {
+                                // Check if the selected banana type is not valid for Banana
+                                _selectedBananaType =
+                                    _bananaTypes[0]; // Set to the first option
+                              }
+                            });
+                          },
+                          items: _productTypes.map((productType) {
+                            return DropdownMenuItem<String>(
+                              value: productType,
+                              child: Text(productType),
+                            );
+                          }).toList(),
+                        ),
+                        SizedBox(width: 8),
+                        // Show the banana type dropdown only when "Banana" is selected
+                        if (_selectedProductType == 'Banana')
+                          DropdownButton<String>(
+                            value: _selectedBananaType,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedBananaType = newValue!;
+                              });
+                            },
+                            items: _bananaTypes.map((bananaType) {
+                              return DropdownMenuItem<String>(
+                                value: bananaType,
+                                child: Text(bananaType),
+                              );
+                            }).toList(),
+                          ),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Quantity(kg)',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the min quantity';
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                _minQuantity = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Enter the minimum quantity you need',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Price (Per kg)',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the max price';
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                _maxPrice = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              labelText:
+                                  'Enter the maximum price you are looking for',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Location (District)',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    DropdownButtonFormField<String>(
+                      value: _location, // Selected value
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select your district';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
                         setState(() {
-                          _selectedProductType = newValue!;
-                          // Reset the selected banana type when changing the product type
-                          _selectedBananaType = 'Seeni'; // Reset to 'Seeni'
+                          _location = value;
                         });
                       },
-                      items: _productTypes.map((productType) {
-                        return DropdownMenuItem<String>(
-                          value: productType,
-                          child: Text(productType),
-                        );
-                      }).toList(),
-                    ),
-                    SizedBox(width: 8),
-                    // Show the banana type dropdown only when "Banana" is selected
-                    if (_selectedProductType == 'Banana')
-                      DropdownButton<String>(
-                        value: _selectedBananaType,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedBananaType = newValue!;
-                          });
-                        },
-                        items: _bananaTypes.map((bananaType) {
-                          return DropdownMenuItem<String>(
-                            value: bananaType,
-                            child: Text(bananaType),
-                          );
-                        }).toList(),
-                      ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Quantity(kg)',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the min quantity';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            _minQuantity = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Enter the minimum quantity you need',
+                      items: [
+                        DropdownMenuItem<String>(
+                          value: 'Ampara',
+                          child: Text('Ampara'),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Price (Per kg)',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the max price';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            _maxPrice = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Enter the maximum price you are looking for',
+                        DropdownMenuItem<String>(
+                          value: 'Anuradhapura',
+                          child: Text('Anuradhapura'),
                         ),
+                        DropdownMenuItem<String>(
+                          value: 'Badulla',
+                          child: Text('Badulla'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Batticaloa',
+                          child: Text('Batticaloa'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Colombo',
+                          child: Text('Colombo'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Galle',
+                          child: Text('Galle'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Gampaha',
+                          child: Text('Gampaha'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Hambantota',
+                          child: Text('Hambantota'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Jaffna',
+                          child: Text('Jaffna'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Kalutara',
+                          child: Text('Kalutara'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Kandy',
+                          child: Text('Kandy'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Kegalle',
+                          child: Text('Kegalle'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Kilinochchi',
+                          child: Text('Kilinochchi'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Kurunegala',
+                          child: Text('Kurunegala'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Mannar',
+                          child: Text('Mannar'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Matale',
+                          child: Text('Matale'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Matara',
+                          child: Text('Matara'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Monaragala',
+                          child: Text('Monaragala'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Mullaitivu',
+                          child: Text('Mullaitivu'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Nuwara Eliya',
+                          child: Text('Nuwara Eliya'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Polonnaruwa',
+                          child: Text('Polonnaruwa'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Puttalam',
+                          child: Text('Puttalam'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Ratnapura',
+                          child: Text('Ratnapura'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Trincomalee',
+                          child: Text('Trincomalee'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Vavuniya',
+                          child: Text('Vavuniya'),
+                        ),
+                      ],
+                      decoration: InputDecoration(
+                        hintText: 'Select your district',
+                      ),
+                      // Adjust the height as needed
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Distance',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the distance';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          _radius = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Enter the distance',
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: _submitForm,
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 204, 160, 0),
+                        ),
+                        child: Text('Submit'),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
-                Text(
-                  'Location (District)',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                DropdownButtonFormField<String>(
-                  value: _location, // Selected value
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please select your district';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    setState(() {
-                      _location = value;
-                    });
-                  },
-                  items: [
-                    DropdownMenuItem<String>(
-                      value: 'Ampara',
-                      child: Text('Ampara'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Anuradhapura',
-                      child: Text('Anuradhapura'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Badulla',
-                      child: Text('Badulla'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Batticaloa',
-                      child: Text('Batticaloa'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Colombo',
-                      child: Text('Colombo'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Galle',
-                      child: Text('Galle'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Gampaha',
-                      child: Text('Gampaha'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Hambantota',
-                      child: Text('Hambantota'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Jaffna',
-                      child: Text('Jaffna'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Kalutara',
-                      child: Text('Kalutara'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Kandy',
-                      child: Text('Kandy'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Kegalle',
-                      child: Text('Kegalle'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Kilinochchi',
-                      child: Text('Kilinochchi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Kurunegala',
-                      child: Text('Kurunegala'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Mannar',
-                      child: Text('Mannar'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Matale',
-                      child: Text('Matale'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Matara',
-                      child: Text('Matara'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Monaragala',
-                      child: Text('Monaragala'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Mullaitivu',
-                      child: Text('Mullaitivu'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Nuwara Eliya',
-                      child: Text('Nuwara Eliya'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Polonnaruwa',
-                      child: Text('Polonnaruwa'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Puttalam',
-                      child: Text('Puttalam'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Ratnapura',
-                      child: Text('Ratnapura'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Trincomalee',
-                      child: Text('Trincomalee'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Vavuniya',
-                      child: Text('Vavuniya'),
-                    ),
-                  ],
-                  decoration: InputDecoration(
-                    hintText: 'Select your district',
-                  ),
-                  // Adjust the height as needed
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Distance',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter the distance';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    setState(() {
-                      _radius = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter the distance',
-                  ),
-                ),
-                SizedBox(height: 32),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: _submitForm,
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 204, 160, 0),
-                    ),
-                    child: Text('Submit'),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

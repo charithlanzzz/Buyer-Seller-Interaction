@@ -14,10 +14,8 @@ class _FarmerInputState extends State<FarmerInput> {
 
   String _selectedProductType = 'Banana';
   String _selectedBananaType = 'Seeni'; // Selected banana type
-  String? _minQuantity;
   String? _maxQuantity;
   String? _minPrice;
-  String? _maxPrice;
   String? _location;
   String? _radius;
 
@@ -73,16 +71,16 @@ class _FarmerInputState extends State<FarmerInput> {
       );
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
-       final url = Uri.parse(
-       'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
+      final url = Uri.parse(
+          'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
       //final url = Uri.parse('http://127.0.0.1:5000/process_input');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "user_type": "seller",
-          "product_type": _selectedProductType,
-          "banana_type": _selectedBananaType,
+          "product_type":_selectedProductType, // Include the selected product type
+          "banana_type": _selectedBananaType, 
           "max_quantity": _maxQuantity,
           "min_price": _minPrice,
           "radius": _radius,
@@ -126,6 +124,14 @@ class _FarmerInputState extends State<FarmerInput> {
         print('Request failed with status: ${response.statusCode}');
       }
     }
+
+    // Access the input values after form submission
+    print("Selected Product Type: $_selectedProductType");
+    print("Selected Banana Type: $_selectedBananaType");
+    print("Max Quantity: $_maxQuantity");
+    print("Min Price: $_minPrice");
+    print("Location: $_location");
+    print("Radius: $_radius");
   }
 
   @override
@@ -167,7 +173,14 @@ class _FarmerInputState extends State<FarmerInput> {
                             setState(() {
                               _selectedProductType = newValue!;
                               // Reset the selected banana type when changing the product type
-                              _selectedBananaType = 'Seeni'; // Reset to 'Seeni'
+                              if (_selectedProductType != 'Banana') {
+                                _selectedBananaType = ''; // Clear the banana type
+                              } else if (!_bananaTypes
+                                  .contains(_selectedBananaType)) {
+                                // Check if the selected banana type is not valid for Banana
+                                _selectedBananaType =
+                                    _bananaTypes[0]; // Set to the first option
+                              }
                             });
                           },
                           items: _productTypes.map((productType) {
