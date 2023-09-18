@@ -33,6 +33,12 @@ def process_input():
     radius = float(data['radius'])
     location_name = data['location_name']
 
+    if 'location_name' not in data:
+        return jsonify({"error": "Invalid location name entered."}), 400
+    
+    if int(data['radius']) < 0 :
+        return jsonify({"error": "Invalid radius value."}), 400
+    
     # Select the appropriate dataset based on user type
     if user_type == 'buyer':
         data = seller_data
@@ -53,13 +59,17 @@ def process_input():
     if user_type == 'buyer':
         filtered_data = data[(data['price'] <= max_price) &
                              (data['quantity'] >= min_quantity) &
-                             (data['product_type'] == product_type) &
-                             (data['banana_type'] == banana_type)].copy()
+                             (data['product_type'] == product_type)].copy()
     else:
         filtered_data = data[(data['price'] >= min_price) &
                              (data['quantity'] <= max_quantity) &
-                             (data['product_type'] == product_type) &
-                             (data['banana_type'] == banana_type)].copy()
+                             (data['product_type'] == product_type)].copy()
+        
+   # Check if banana_type is provided and product_type is "Banana"
+    if 'banana_type' in data and product_type == 'Banana':
+        filtered_data = filtered_data[filtered_data['banana_type'] == banana_type]
+
+ 
 
     # Check if there are any matching stakeholders
     if not filtered_data.empty:
@@ -126,7 +136,8 @@ def process_input():
                         "Prepare the stem by removing the tough outer layers and cutting it into desired shapes before cooking."
                     ]
                 else:
-                    recommendation_plan = ["No specific recommendation plan available for the selected product type."]
+                    # Handle the case where product_type is not supported (e.g., return a 404 error)
+                    return jsonify({"error": "Product type not supported"}), 404
             else:
                 recommendation_plan = ["No specific recommendation plan available for sellers."]
 
