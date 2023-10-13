@@ -79,8 +79,9 @@ class _FarmerInputState extends State<FarmerInput> {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "user_type": "seller",
-          "product_type":_selectedProductType, // Include the selected product type
-          "banana_type": _selectedBananaType, 
+          "product_type":
+              _selectedProductType, // Include the selected product type
+          "banana_type": _selectedBananaType,
           "max_quantity": _maxQuantity,
           "min_price": _minPrice,
           "radius": _radius,
@@ -174,7 +175,8 @@ class _FarmerInputState extends State<FarmerInput> {
                               _selectedProductType = newValue!;
                               // Reset the selected banana type when changing the product type
                               if (_selectedProductType != 'Banana') {
-                                _selectedBananaType = ''; // Clear the banana type
+                                _selectedBananaType =
+                                    ''; // Clear the banana type
                               } else if (!_bananaTypes
                                   .contains(_selectedBananaType)) {
                                 // Check if the selected banana type is not valid for Banana
@@ -231,7 +233,19 @@ class _FarmerInputState extends State<FarmerInput> {
                               });
                             },
                             decoration: InputDecoration(
-                              labelText: 'Enter the max quantity you have',
+                              labelText: _selectedProductType == 'Banana'
+                                  ? 'Available maximum quantity is 1000kg'
+                                  : _selectedProductType == 'Leaves'
+                                      ? 'Available maximum quantity is 800kg'
+                                      : _selectedProductType == 'Banana Blossom'
+                                          ? 'Available maximum quantity is 700kg'
+                                          : _selectedProductType ==
+                                                  'Banana Stem'
+                                              ? 'Available maximum quantity is 600kg'
+                                              : _selectedProductType ==
+                                                      'Banana Peel'
+                                                  ? 'Available maximum quantity is 500kg'
+                                                  : 'Enter the max quantity you have',
                             ),
                           ),
                         ),
@@ -259,7 +273,19 @@ class _FarmerInputState extends State<FarmerInput> {
                               });
                             },
                             decoration: InputDecoration(
-                              labelText: 'Enter the minimum price per kilogram',
+                              labelText: _selectedProductType == 'Banana'
+                                  ? 'The minimum price is Rs.250'
+                                  : _selectedProductType == 'Leaves'
+                                      ? 'The minimum price is Rs.250'
+                                      : _selectedProductType == 'Banana Blossom'
+                                          ? 'The minimum price is Rs.250'
+                                          : _selectedProductType ==
+                                                  'Banana Stem'
+                                              ? 'The minimum price is Rs.250'
+                                              : _selectedProductType ==
+                                                      'Banana Peel'
+                                                  ? 'The minimum price is Rs.250'
+                                                  : 'Enter the min price',
                             ),
                           ),
                         ),
