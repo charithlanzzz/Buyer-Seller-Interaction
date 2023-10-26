@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:research_project/components/buyer_seller/buyer_output.dart';
 import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class BuyerInput extends StatefulWidget {
   @override
@@ -11,13 +13,15 @@ class BuyerInput extends StatefulWidget {
 
 class _BuyerInputState extends State<BuyerInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Location _location = Location();
 
   String _selectedProductType = 'Banana';
   String _selectedBananaType = 'Seeni'; // Selected banana type
   String? _minQuantity;
   String? _maxPrice;
-  String? _location;
+  String? _locationName;
   String? _radius;
+  LatLng? _selectedLocation;
 
   List<String> _productTypes = [
     'Banana',
@@ -73,23 +77,25 @@ class _BuyerInputState extends State<BuyerInput> {
 
       final url = Uri.parse(
           'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
-      //final url = Uri.parse('http://127.0.0.1:5000/process_input');
+      // final url = Uri.parse('http://127.0.0.1:49350/process_input_new');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "user_type": "buyer",
-          "product_type":_selectedProductType, // Include the selected product type
-          "banana_type": _selectedBananaType, 
+          "product_type": _selectedProductType, // Include the selected product type
+          "banana_type": _selectedBananaType,
           "max_quantity": _minQuantity,
           "min_price": _maxPrice,
           "radius": _radius,
-          "location_name": _location,
+          "location_name": _locationName,
+          // Include the selected location as latitude and longitude
+          "latitude": _selectedLocation?.latitude,
+          "longitude": _selectedLocation?.longitude,
         }),
       );
 
-      Navigator.pop(
-          context); // Close the loading dialog // Close the loading dialog
+      Navigator.pop(context);
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
@@ -125,13 +131,25 @@ class _BuyerInputState extends State<BuyerInput> {
       }
     }
 
-    // Access the input values after form submission
     print("Selected Product Type: $_selectedProductType");
     print("Selected Banana Type: $_selectedBananaType");
     print("Max Quantity: $_minQuantity");
     print("Min Price: $_maxPrice");
-    print("Location: $_location");
+    print("Location: $_locationName");
     print("Radius: $_radius");
+    print("Selected Location: $_selectedLocation");
+  }
+
+  Future<void> _getLocation() async {
+    try {
+      final currentLocation = await _location.getLocation();
+      _selectedLocation = LatLng(currentLocation.latitude!, currentLocation.longitude!);
+      setState(() {
+        _locationName = "Current Location";
+      });
+    } catch (e) {
+      print("Error getting location: $e");
+    }
   }
 
   @override
@@ -267,131 +285,27 @@ class _BuyerInputState extends State<BuyerInput> {
                         ),
                       ],
                     ),
+                    
+                    // Replace the "Location (District)" section with a button to get the location
                     SizedBox(height: 16),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: _getLocation,
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 204, 160, 0),
+                        ),
+                        child: Text('Get Current Location'),
+                      ),
+                    ),
+                    SizedBox(height: 8),
                     Text(
-                      'Location (District)',
+                      'Selected Location',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    DropdownButtonFormField<String>(
-                      value: _location, // Selected value
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select your district';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          _location = value;
-                        });
-                      },
-                      items: [
-                        DropdownMenuItem<String>(
-                          value: 'Ampara',
-                          child: Text('Ampara'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Anuradhapura',
-                          child: Text('Anuradhapura'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Badulla',
-                          child: Text('Badulla'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Batticaloa',
-                          child: Text('Batticaloa'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Colombo',
-                          child: Text('Colombo'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Galle',
-                          child: Text('Galle'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Gampaha',
-                          child: Text('Gampaha'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Hambantota',
-                          child: Text('Hambantota'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Jaffna',
-                          child: Text('Jaffna'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kalutara',
-                          child: Text('Kalutara'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kandy',
-                          child: Text('Kandy'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kegalle',
-                          child: Text('Kegalle'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kilinochchi',
-                          child: Text('Kilinochchi'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kurunegala',
-                          child: Text('Kurunegala'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Mannar',
-                          child: Text('Mannar'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Matale',
-                          child: Text('Matale'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Matara',
-                          child: Text('Matara'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Monaragala',
-                          child: Text('Monaragala'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Mullaitivu',
-                          child: Text('Mullaitivu'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Nuwara Eliya',
-                          child: Text('Nuwara Eliya'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Polonnaruwa',
-                          child: Text('Polonnaruwa'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Puttalam',
-                          child: Text('Puttalam'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Ratnapura',
-                          child: Text('Ratnapura'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Trincomalee',
-                          child: Text('Trincomalee'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Vavuniya',
-                          child: Text('Vavuniya'),
-                        ),
-                      ],
-                      decoration: InputDecoration(
-                        hintText: 'Select your district',
-                      ),
-                      // Adjust the height as needed
+                    Text(
+                      _locationName ?? 'Select a location',
+                      style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 8),
                     Text(
