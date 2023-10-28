@@ -340,7 +340,8 @@ class _FarmerInputState extends State<FarmerInput> {
                       child: ElevatedButton.icon(
                         onPressed: _getLocation,
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 4, 13, 110),
+                          primary: Colors
+                                      .green,
                         ),
                         icon: Icon(Icons.location_on), // Add the map icon here
                         label: Text('Get Current Location'),

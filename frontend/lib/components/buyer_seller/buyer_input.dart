@@ -339,7 +339,8 @@ class _BuyerInputState extends State<BuyerInput> {
                       child: ElevatedButton.icon(
                         onPressed: _getLocation,
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 4, 13, 110),
+                          primary: Colors
+                                      .green,
                         ),
                         icon: Icon(Icons.location_on), // Add the map icon here
                         label: Text('Get Current Location'),
@@ -377,7 +378,7 @@ class _BuyerInputState extends State<BuyerInput> {
                       child: ElevatedButton(
                         onPressed: _submitForm,
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 204, 160, 0),
+                          primary: Color.fromARGB(255, 234, 178, 7),
                           
                         ),
                         child: Text('Submit'),

@@ -29,49 +29,65 @@ class FarmerOutput extends StatelessWidget {
               Column(
                 children: responseData['matching_stakeholders']
                     .map<Widget>((stakeholder) => Card(
-                      child: ListTile(
-                        title: Text(
-                          stakeholder['name'].toString(),
-                          style: TextStyle(
-                            fontSize: 16, // Customize the font size
-                            fontWeight:
-                            FontWeight.bold, // Apply bold font weight
+                          child: ListTile(
+                            title: Text(
+                              stakeholder['name'].toString(),
+                              style: TextStyle(
+                                fontSize: 16, // Customize the font size
+                                fontWeight:
+                                    FontWeight.bold, // Apply bold font weight
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  stakeholder['contact_number'].toString(),
+                                  style: TextStyle(
+                                    fontSize: 14, // Customize the font size
+                                    color:
+                                        Colors.grey, // Customize the text color
+                                  ),
+                                ),
+                                Text(
+                                  stakeholder['location_name'].toString(),
+                                  style: TextStyle(
+                                    fontSize: 14, // Customize the font size
+                                    color: Color.fromARGB(255, 73, 104,
+                                        225), // Customize the text color
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: ElevatedButton.icon(
+                                onPressed: () {
+                                  // Navigate to the details page and pass the stakeholder's data
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FarmerOutputDetails(stakeholder),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors
+                                      .green, // Change the background color to your preferred color
+                                ),
+                                icon: Icon(
+                                  Icons
+                                      .visibility, // Replace with the icon you want
+                                  color: Colors
+                                      .white, // Change the icon color to your preferred color
+                                ),
+                                label: Text(
+                                  'View',
+                                  style: TextStyle(
+                                      color: Colors
+                                          .white), // Change the text color to your preferred color
+                                ),
+                              ),
                           ),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              stakeholder['contact_number'].toString(),
-                              style: TextStyle(
-                                fontSize: 14, // Customize the font size
-                                color:
-                                Colors.grey, // Customize the text color
-                              ),
-                            ),
-                            Text(
-                              stakeholder['location_name'].toString(),
-                              style: TextStyle(
-                                fontSize: 14, // Customize the font size
-                                color:
-                                Color.fromARGB(255, 73, 104, 225), // Customize the text color
-                              ),
-                            ),
-                          ],
-                        ),
-                        trailing: ElevatedButton(
-                        onPressed: () {
-                          // Navigate to the details page and pass the stakeholder's data
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => FarmerOutputDetails(stakeholder),
-                            ),
-                          );
-                        },
-                        child: Text('View'),
-                      ),
-                      ),
-                    ))
+                        ))
                     .toList(),
               ),
             if (responseData['matching_stakeholders'] == null ||

@@ -9,7 +9,8 @@ class BuyerOutputDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stakeholder Details'),
+        title: const Text('Farmer Details'),
+        backgroundColor: Color.fromARGB(255, 223, 182, 49),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -35,17 +36,17 @@ class BuyerOutputDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Stakeholder Details',
+                      'You can find the details of the farmer and the product',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Color.fromARGB(226, 0, 1, 79),
                       ),
                     ),
                     SizedBox(height: 16),
                     ListTile(
                       title: Text(
-                        'Name:',
+                        "Farmer's Name:",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -53,7 +54,8 @@ class BuyerOutputDetails extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${stakeholder['name']}',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16,
+                        color: Color.fromARGB(255, 73, 104, 225),),
                       ),
                     ),
                     ListTile(
@@ -66,7 +68,8 @@ class BuyerOutputDetails extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${stakeholder['contact_number']}',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16,
+                        color: Color.fromARGB(255, 73, 104, 225)),
                       ),
                     ),
                     ListTile(
@@ -79,12 +82,13 @@ class BuyerOutputDetails extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${stakeholder['location_name']}',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16,
+                        color: Color.fromARGB(255, 73, 104, 225)),
                       ),
                     ),
                     ListTile(
                       title: Text(
-                        'Quantity:',
+                        'Quantity(Kg):',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -92,12 +96,13 @@ class BuyerOutputDetails extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${stakeholder['quantity']}',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16,
+                        color: Color.fromARGB(255, 73, 104, 225)),
                       ),
                     ),
                     ListTile(
                       title: Text(
-                        'Price:',
+                        'Price(Per Kg):',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -105,7 +110,8 @@ class BuyerOutputDetails extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${stakeholder['price']}',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16,
+                        color: Color.fromARGB(255, 73, 104, 225)),
                       ),
                     ),
                     ListTile(
@@ -118,22 +124,30 @@ class BuyerOutputDetails extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${stakeholder['product_type']}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        'Banana Type:',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Color.fromARGB(255, 73, 104, 225)
                         ),
                       ),
-                      subtitle: Text(
-                        '${stakeholder['banana_type']}',
-                        style: TextStyle(fontSize: 16),
-                      ),
                     ),
+                    Visibility(
+                      visible: stakeholder['product_type'] == 'Banana',
+                      child: ListTile(
+                        title: Text(
+                          'Banana Type:',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          '${stakeholder['banana_type']}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 73, 104, 225)),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

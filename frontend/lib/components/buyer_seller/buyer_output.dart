@@ -28,49 +28,64 @@ class BuyerOutput extends StatelessWidget {
               Column(
                 children: responseData['matching_stakeholders']
                     .map<Widget>((stakeholder) => Card(
-                      child: ListTile(
-                        title: Text(
-                          stakeholder['name'].toString(),
-                          style: TextStyle(
-                            fontSize: 16, // Customize the font size
-                            fontWeight:
-                            FontWeight.bold, // Apply bold font weight
-                          ),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              stakeholder['contact_number'].toString(),
-                              style: TextStyle(
-                                fontSize: 14, // Customize the font size
-                                color:
-                                Colors.grey, // Customize the text color
+                          child: ListTile(
+                              title: Text(
+                                stakeholder['name'].toString(),
+                                style: TextStyle(
+                                  fontSize: 16, // Customize the font size
+                                  fontWeight:
+                                      FontWeight.bold, // Apply bold font weight
+                                ),
                               ),
-                            ),
-                            Text(
-                              stakeholder['location_name'].toString(),
-                              style: TextStyle(
-                                fontSize: 14, // Customize the font size
-                                color:
-                                Color.fromARGB(255, 73, 104, 225), // Customize the text color
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    stakeholder['contact_number'].toString(),
+                                    style: TextStyle(
+                                      fontSize: 14, // Customize the font size
+                                      color: Colors
+                                          .grey, // Customize the text color
+                                    ),
+                                  ),
+                                  Text(
+                                    stakeholder['location_name'].toString(),
+                                    style: TextStyle(
+                                      fontSize: 14, // Customize the font size
+                                      color: Color.fromARGB(255, 73, 104,
+                                          225), // Customize the text color
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        trailing: ElevatedButton(
-                        onPressed: () {
-                          // Navigate to the details page and pass the stakeholder's data
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => BuyerOutputDetails(stakeholder),
-                            ),
-                          );
-                        },
-                        child: Text('View'),
-                      ),
-                      ),
-                    ))
+                              trailing: ElevatedButton.icon(
+                                onPressed: () {
+                                  // Navigate to the details page and pass the stakeholder's data
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          BuyerOutputDetails(stakeholder),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors
+                                      .green, // Change the background color to your preferred color
+                                ),
+                                icon: Icon(
+                                  Icons
+                                      .visibility, // Replace with the icon you want
+                                  color: Colors
+                                      .white, // Change the icon color to your preferred color
+                                ),
+                                label: Text(
+                                  'View',
+                                  style: TextStyle(
+                                      color: Colors
+                                          .white), // Change the text color to your preferred color
+                                ),
+                              )),
+                        ))
                     .toList(),
               ),
             SizedBox(height: 16),
@@ -84,11 +99,12 @@ class BuyerOutput extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: responseData['recommendation_plan']
                     .map<Widget>((recommendation) => Text(
-                  '- $recommendation',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 11, 30, 107), // Change this to your desired color
-                  ),
-                ))
+                          '- $recommendation',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 11, 30,
+                                107), // Change this to your desired color
+                          ),
+                        ))
                     .toList(),
               ),
           ],
