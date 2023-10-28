@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;
 import 'package:research_project/components/buyer_seller/buyer_output.dart';
 import 'dart:convert';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as location;
 
 class BuyerInput extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class BuyerInput extends StatefulWidget {
 
 class _BuyerInputState extends State<BuyerInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final Location _location = Location();
+  final location.Location _location = location.Location();
 
   String _selectedProductType = 'Banana';
   String _selectedBananaType = 'Seeni'; // Selected banana type
@@ -83,7 +84,8 @@ class _BuyerInputState extends State<BuyerInput> {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "user_type": "buyer",
-          "product_type": _selectedProductType, // Include the selected product type
+          "product_type":
+              _selectedProductType, // Include the selected product type
           "banana_type": _selectedBananaType,
           "max_quantity": _minQuantity,
           "min_price": _maxPrice,
@@ -143,10 +145,27 @@ class _BuyerInputState extends State<BuyerInput> {
   Future<void> _getLocation() async {
     try {
       final currentLocation = await _location.getLocation();
-      _selectedLocation = LatLng(currentLocation.latitude!, currentLocation.longitude!);
-      setState(() {
-        _locationName = "Current Location";
-      });
+      _selectedLocation =
+          LatLng(currentLocation.latitude!, currentLocation.longitude!);
+
+      final placemarks = await placemarkFromCoordinates(
+        currentLocation.latitude!,
+        currentLocation.longitude!,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final placemark = placemarks[0];
+        final fullAddress =
+            '${placemark.thoroughfare}, ${placemark.subLocality}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}';
+
+        setState(() {
+          _locationName = fullAddress;
+        });
+      } else {
+        setState(() {
+          _locationName = "Location Not Found";
+        });
+      }
     } catch (e) {
       print("Error getting location: $e");
     }
@@ -285,29 +304,30 @@ class _BuyerInputState extends State<BuyerInput> {
                         ),
                       ],
                     ),
-                    
+
                     // Replace the "Location (District)" section with a button to get the location
                     SizedBox(height: 16),
+                    Text(
+                      'Current Location',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                     Center(
-                      child: ElevatedButton(
+                      child: ElevatedButton.icon(
                         onPressed: _getLocation,
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 204, 160, 0),
+                          primary: Color.fromARGB(255, 4, 13, 110),
                         ),
-                        child: Text('Get Current Location'),
+                        icon: Icon(Icons.location_on), // Add the map icon here
+                        label: Text('Get Current Location'),
                       ),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Selected Location',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      _locationName ?? 'Select a location',
+                      _locationName ?? '',
                       style: TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 16),
                     Text(
                       'Distance',
                       style:
@@ -335,8 +355,10 @@ class _BuyerInputState extends State<BuyerInput> {
                         onPressed: _submitForm,
                         style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 204, 160, 0),
+                          
                         ),
                         child: Text('Submit'),
+                        
                       ),
                     ),
                   ],
