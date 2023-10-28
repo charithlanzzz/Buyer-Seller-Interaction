@@ -41,7 +41,7 @@ class _BuyerInputScreenState extends State<BuyerInputScreen> {
                   ),
                 ),
                 Text(
-                  'BANANA XPERT',
+                  'BananaXpert',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,

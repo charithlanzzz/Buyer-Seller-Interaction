@@ -41,7 +41,7 @@ class _BestBuyerScreenState extends State<BestBuyerScreen> {
                   ),
                 ),
                 Text(
-                  'BANANA XPERT',
+                  'BananaXpert',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,

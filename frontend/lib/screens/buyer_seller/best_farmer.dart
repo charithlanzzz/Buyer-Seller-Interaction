@@ -41,7 +41,7 @@ class _BestFarmerScreenState extends State<BestFarmerScreen> {
                   ),
                 ),
                 Text(
-                  'BANANA XPERT',
+                  'BananaXpert',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,

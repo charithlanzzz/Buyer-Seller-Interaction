@@ -269,7 +269,19 @@ class _BuyerInputState extends State<BuyerInput> {
                               });
                             },
                             decoration: InputDecoration(
-                              labelText: 'Enter the minimum quantity you need',
+                              labelText: _selectedProductType == 'Banana'
+                                  ? 'Available minimum quantity is 500kg'
+                                  : _selectedProductType == 'Leaves'
+                                      ? 'Available minimum quantity is 600kg'
+                                      : _selectedProductType == 'Banana Blossom'
+                                          ? 'Available minimum quantity is 700kg'
+                                          : _selectedProductType ==
+                                                  'Banana Stem'
+                                              ? 'Available minimum quantity is 800kg'
+                                              : _selectedProductType ==
+                                                      'Banana Peel'
+                                                  ? 'Available minimum quantity is 1000kg'
+                                                  : 'Enter the minimum quantity you have',
                             ),
                           ),
                         ),
@@ -297,8 +309,19 @@ class _BuyerInputState extends State<BuyerInput> {
                               });
                             },
                             decoration: InputDecoration(
-                              labelText:
-                                  'Enter the maximum price you are looking for',
+                              labelText: _selectedProductType == 'Banana'
+                                  ? 'The maximum price is Rs.1250'
+                                  : _selectedProductType == 'Leaves'
+                                      ? 'The maximum price is Rs.1450'
+                                      : _selectedProductType == 'Banana Blossom'
+                                          ? 'The maximum price is Rs.250'
+                                          : _selectedProductType ==
+                                                  'Banana Stem'
+                                              ? 'The maximum price is Rs.250'
+                                              : _selectedProductType ==
+                                                      'Banana Peel'
+                                                  ? 'The maximum price is Rs.250'
+                                                  : 'Enter the maximum price',
                             ),
                           ),
                         ),
