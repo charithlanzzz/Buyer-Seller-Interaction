@@ -87,8 +87,8 @@ class _BuyerInputState extends State<BuyerInput> {
           "product_type":
               _selectedProductType, // Include the selected product type
           "banana_type": _selectedBananaType,
-          "max_quantity": _minQuantity,
-          "min_price": _maxPrice,
+          "min_quantity": _minQuantity,
+          "max_price": _maxPrice,
           "radius": _radius,
           "location_name": _locationName,
           // Include the selected location as latitude and longitude

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart' as location;
 import 'package:research_project/components/buyer_seller/farmer_output.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,13 +14,15 @@ class FarmerInput extends StatefulWidget {
 
 class _FarmerInputState extends State<FarmerInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final location.Location _location = location.Location();
 
   String _selectedProductType = 'Banana';
   String _selectedBananaType = 'Seeni'; // Selected banana type
   String? _maxQuantity;
   String? _minPrice;
-  String? _location;
+  String? _locationName;
   String? _radius;
+  LatLng? _selectedLocation;
 
   List<String> _productTypes = [
     'Banana',
@@ -85,7 +90,10 @@ class _FarmerInputState extends State<FarmerInput> {
           "max_quantity": _maxQuantity,
           "min_price": _minPrice,
           "radius": _radius,
-          "location_name": _location,
+          "location_name": _locationName,
+          // Include the selected location as latitude and longitude
+          "latitude": _selectedLocation?.latitude,
+          "longitude": _selectedLocation?.longitude,
         }),
       );
 
@@ -131,8 +139,38 @@ class _FarmerInputState extends State<FarmerInput> {
     print("Selected Banana Type: $_selectedBananaType");
     print("Max Quantity: $_maxQuantity");
     print("Min Price: $_minPrice");
-    print("Location: $_location");
+    print("Location: $_locationName");
     print("Radius: $_radius");
+    print("Selected Location: $_selectedLocation");
+  }
+
+  Future<void> _getLocation() async {
+    try {
+      final currentLocation = await _location.getLocation();
+      _selectedLocation =
+          LatLng(currentLocation.latitude!, currentLocation.longitude!);
+
+      final placemarks = await placemarkFromCoordinates(
+        currentLocation.latitude!,
+        currentLocation.longitude!,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final placemark = placemarks[0];
+        final fullAddress =
+            '${placemark.thoroughfare}, ${placemark.subLocality}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}';
+
+        setState(() {
+          _locationName = fullAddress;
+        });
+      } else {
+        setState(() {
+          _locationName = "Location Not Found";
+        });
+      }
+    } catch (e) {
+      print("Error getting location: $e");
+    }
   }
 
   @override
@@ -292,131 +330,28 @@ class _FarmerInputState extends State<FarmerInput> {
                       ],
                     ),
                     SizedBox(height: 8),
+                    SizedBox(height: 16),
                     Text(
-                      'Location (District)',
+                      'Current Location',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    DropdownButtonFormField<String>(
-                      value: _location, // Selected value
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select your district';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          _location = value;
-                        });
-                      },
-                      items: [
-                        DropdownMenuItem<String>(
-                          value: 'Ampara',
-                          child: Text('Ampara'),
+                    Center(
+                      child: ElevatedButton.icon(
+                        onPressed: _getLocation,
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 4, 13, 110),
                         ),
-                        DropdownMenuItem<String>(
-                          value: 'Anuradhapura',
-                          child: Text('Anuradhapura'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Badulla',
-                          child: Text('Badulla'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Batticaloa',
-                          child: Text('Batticaloa'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Colombo',
-                          child: Text('Colombo'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Galle',
-                          child: Text('Galle'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Gampaha',
-                          child: Text('Gampaha'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Hambantota',
-                          child: Text('Hambantota'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Jaffna',
-                          child: Text('Jaffna'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kalutara',
-                          child: Text('Kalutara'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kandy',
-                          child: Text('Kandy'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kegalle',
-                          child: Text('Kegalle'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kilinochchi',
-                          child: Text('Kilinochchi'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Kurunegala',
-                          child: Text('Kurunegala'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Mannar',
-                          child: Text('Mannar'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Matale',
-                          child: Text('Matale'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Matara',
-                          child: Text('Matara'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Monaragala',
-                          child: Text('Monaragala'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Mullaitivu',
-                          child: Text('Mullaitivu'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Nuwara Eliya',
-                          child: Text('Nuwara Eliya'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Polonnaruwa',
-                          child: Text('Polonnaruwa'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Puttalam',
-                          child: Text('Puttalam'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Ratnapura',
-                          child: Text('Ratnapura'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Trincomalee',
-                          child: Text('Trincomalee'),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: 'Vavuniya',
-                          child: Text('Vavuniya'),
-                        ),
-                      ],
-                      decoration: InputDecoration(
-                        hintText: 'Select your district',
+                        icon: Icon(Icons.location_on), // Add the map icon here
+                        label: Text('Get Current Location'),
                       ),
                     ),
                     SizedBox(height: 8),
+                    Text(
+                      _locationName ?? '',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 16),
                     Text(
                       'Distance (km)',
                       style:
