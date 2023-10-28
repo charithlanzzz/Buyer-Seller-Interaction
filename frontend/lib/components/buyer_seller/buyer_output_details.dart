@@ -16,26 +16,128 @@ class BuyerOutputDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Stakeholder Details',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 7,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Stakeholder Details',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    ListTile(
+                      title: Text(
+                        'Name:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['name']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Contact Number:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['contact_number']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Location:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['location_name']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Quantity:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['quantity']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Price:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['price']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Product Type:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['product_type']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Banana Type:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${stakeholder['banana_type']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            SizedBox(height: 8),
-            Text(
-              'Name: ${stakeholder['name']}',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Contact Number: ${stakeholder['contact_number']}',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Location: ${stakeholder['location_name']}',
-              style: TextStyle(fontSize: 16),
-            ),
-            // Add more details as needed
           ],
         ),
       ),

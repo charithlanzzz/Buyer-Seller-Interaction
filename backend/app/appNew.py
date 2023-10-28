@@ -44,12 +44,19 @@ def process_input():
         contact_number = 'contact_no'
         location_columns = ['latitude', 'longitude']
         id_column = 'seller_id'
+        price = 'price'
+        quantity = 'quantity'
+
     elif user_type == 'seller':
         data = buyer_data
         stakeholder_name = 'buyer_name'
         contact_number = 'contact_no'
         location_columns = ['latitude', 'longitude']
         id_column = 'buyer_id'
+        price = 'price'
+        quantity = 'quantity'
+       
+        
     else:
         return jsonify({"error": "Invalid user type entered."}), 400
 
@@ -83,7 +90,12 @@ def process_input():
             "id": row[id_column],
             "name": row[stakeholder_name],
             "contact_number": row[contact_number],
-            "location_name": row['location_name']
+            "location_name": row['location_name'],
+            "price": row[price],
+            "quantity": row[quantity],
+            "product_type": product_type,
+            "banana_type": banana_type,
+              
         })
 
     # Recommendation plan for buyers based on product type
@@ -95,7 +107,33 @@ def process_input():
                 "Consider buying slightly green bananas if you prefer them to ripen over a few days.",
                 "Ensure proper handling and storage to maintain freshness."
             ]
-        # Add recommendations for other product types as needed
+        elif product_type == 'Banana Blossom':
+            recommendation_plan = [
+                "Choose fresh, unblemished banana blossoms with tight petals and no signs of wilting.",
+                "Use them in various culinary preparations like salads, stir-fries, or traditional dishes.",
+                "Prepare the blossom by removing the tough outer layers and soaking it in water with lemon juice to prevent browning."
+            ]
+        elif product_type == 'Banana Peel':
+            recommendation_plan = [
+            "Opt for organic or pesticide-free banana peels if possible.",
+            "Utilize banana peels for composting, as they are rich in nutrients and can enhance soil fertility.",
+            "Experiment with recipes that incorporate banana peels, such as smoothies or desserts, after thoroughly washing and removing any wax or pesticide residues."
+            ]
+        elif product_type == 'Leaves':
+            recommendation_plan = [
+            "Ensure the leaves are fresh and free from damage or discoloration.",
+            "Use banana leaves as natural food wraps for steaming, grilling, or baking dishes, imparting a distinct flavor.",
+            "Explore traditional recipes that involve cooking or serving food in banana leaves."
+            ]
+        elif product_type == 'Banana Stem':
+            recommendation_plan = [
+            "Look for firm, unblemished banana stems with no signs of rot.",
+            "Utilize banana stems in various dishes like salads, stir-fries, or curries.",
+            "Prepare the stem by removing the tough outer layers and cutting it into desired shapes before cooking."
+            ]
+        else:
+            # Handle the case where product_type is not supported (e.g., return a 404 error)
+            return jsonify({"error": "Product type not supported"}), 404
     else:
         recommendation_plan = ["No specific recommendation plan available for sellers."]
 
@@ -105,6 +143,7 @@ def process_input():
     }
 
     return jsonify(response), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)
