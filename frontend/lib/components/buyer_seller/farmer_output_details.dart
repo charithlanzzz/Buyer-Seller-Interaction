@@ -9,7 +9,7 @@ class FarmerOutputDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Farmer Details'),
+        title: const Text('Whole-sale Buyer Details'),
         backgroundColor: Color.fromARGB(255, 223, 182, 49),
       ),
       body: SingleChildScrollView(

@@ -76,9 +76,10 @@ class _BuyerInputState extends State<BuyerInput> {
       );
       await Future.delayed(Duration(seconds: 2)); // Delay for 2 seconds
 
-      final url = Uri.parse(
-          'https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
-      // final url = Uri.parse('http://127.0.0.1:49350/process_input_new');
+      final url = Uri.parse('https://buyer-seller-interaction-b305e21cabf9.herokuapp.com/process_input');
+      // final url = Uri.parse('http://127.0.0.1:5000/process_input_new');
+      // final url = Uri.parse('http://139.99.26.3:8000/process_input');
+
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -118,7 +119,7 @@ class _BuyerInputState extends State<BuyerInput> {
             MaterialPageRoute(builder: (context) => BuyerOutput(responseData)),
           );
         }
-      } else if (response.statusCode == 404 || response.statusCode == 400) {
+      } else if (response.statusCode == 404 || response.statusCode == 400 || response.statusCode == 500) {
         Fluttertoast.showToast(
           msg: "No matching stakeholders found based on the given requirements",
           toastLength: Toast.LENGTH_LONG,
@@ -270,17 +271,17 @@ class _BuyerInputState extends State<BuyerInput> {
                             },
                             decoration: InputDecoration(
                               labelText: _selectedProductType == 'Banana'
-                                  ? 'Available minimum quantity is 500kg'
+                                  ? 'Enter the minimum quantity you need (<1100kg)'
                                   : _selectedProductType == 'Leaves'
-                                      ? 'Available minimum quantity is 600kg'
+                                      ? 'Enter the minimum quantity you need (<1300kg)'
                                       : _selectedProductType == 'Banana Blossom'
-                                          ? 'Available minimum quantity is 700kg'
+                                          ? 'Enter the minimum quantity you need (<1300kg)'
                                           : _selectedProductType ==
                                                   'Banana Stem'
-                                              ? 'Available minimum quantity is 800kg'
+                                              ? 'Enter the minimum quantity you need (<1300kg)'
                                               : _selectedProductType ==
                                                       'Banana Peel'
-                                                  ? 'Available minimum quantity is 1000kg'
+                                                  ? 'Enter the minimum quantity you need (>1100kg)'
                                                   : 'Enter the minimum quantity you have',
                             ),
                           ),
@@ -310,17 +311,17 @@ class _BuyerInputState extends State<BuyerInput> {
                             },
                             decoration: InputDecoration(
                               labelText: _selectedProductType == 'Banana'
-                                  ? 'The maximum price is Rs.1250'
+                                  ? 'Enter The maximum price you can spend per kg (>Rs.100)'
                                   : _selectedProductType == 'Leaves'
-                                      ? 'The maximum price is Rs.1450'
+                                      ? 'Enter The maximum price you can spend per kg (>Rs.500)'
                                       : _selectedProductType == 'Banana Blossom'
-                                          ? 'The maximum price is Rs.250'
+                                          ? 'Enter The maximum price you can spend per kg (>Rs.120)'
                                           : _selectedProductType ==
                                                   'Banana Stem'
-                                              ? 'The maximum price is Rs.250'
+                                              ? 'Enter The maximum price you can spend per kg (>Rs.800)'
                                               : _selectedProductType ==
                                                       'Banana Peel'
-                                                  ? 'The maximum price is Rs.250'
+                                                  ? 'Enter The maximum price you can spend per kg (>Rs.700)'
                                                   : 'Enter the maximum price',
                             ),
                           ),
