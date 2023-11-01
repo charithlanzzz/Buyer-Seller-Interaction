@@ -105,31 +105,47 @@ def process_input():
             recommendation_plan = [
                 "Select ripe bananas with even yellow color and firm texture for immediate consumption.",
                 "Consider buying slightly green bananas if you prefer them to ripen over a few days.",
-                "Ensure proper handling and storage to maintain freshness."
+                "Ensure proper handling and storage to maintain freshness.",
+                "Explore a variety of recipes using bananas, such as banana bread, smoothies, and banana pudding.",
+                "Use overripe bananas to make delicious banana pancakes or banana muffins.",
+                "Freeze peeled bananas for later use in smoothies or as a healthy snack."
             ]
         elif product_type == 'Banana Blossom':
             recommendation_plan = [
                 "Choose fresh, unblemished banana blossoms with tight petals and no signs of wilting.",
                 "Use them in various culinary preparations like salads, stir-fries, or traditional dishes.",
-                "Prepare the blossom by removing the tough outer layers and soaking it in water with lemon juice to prevent browning."
+                "Prepare the blossom by removing the tough outer layers and soaking it in water with lemon juice to prevent browning.",
+                "Try making a traditional Thai or Filipino banana blossom salad with a zesty dressing.",
+                "Explore vegetarian or vegan dishes using banana blossoms as a meat substitute due to their meaty texture.",
+                "Include banana blossoms in curries, stews, or as a unique pizza topping for a distinctive flavor and texture."
             ]
         elif product_type == 'Banana Peel':
             recommendation_plan = [
             "Opt for organic or pesticide-free banana peels if possible.",
             "Utilize banana peels for composting, as they are rich in nutrients and can enhance soil fertility.",
-            "Experiment with recipes that incorporate banana peels, such as smoothies or desserts, after thoroughly washing and removing any wax or pesticide residues."
+            "Experiment with recipes that incorporate banana peels, such as smoothies or desserts, after thoroughly washing and removing any wax or pesticide residues.",
+            "Make banana peel tea by boiling the peels and adding honey or spices for a soothing beverage with potential health benefits.",
+            "Create a homemade banana peel fertilizer by blending peels and water, then using it to nourish your plants.",
+            "Consider using banana peels as a natural, eco-friendly cleaning agent for polishing shoes or silverware.",
             ]
         elif product_type == 'Leaves':
             recommendation_plan = [
             "Ensure the leaves are fresh and free from damage or discoloration.",
             "Use banana leaves as natural food wraps for steaming, grilling, or baking dishes, imparting a distinct flavor.",
-            "Explore traditional recipes that involve cooking or serving food in banana leaves."
+            "Explore traditional recipes that involve cooking or serving food in banana leaves, such as tamales, grilled fish, or rice cakes.",
+            "Consider using banana leaves as eco-friendly, biodegradable plates or serving platters for outdoor events or picnics.",
+            "Use dried and aged banana leaves for craft projects, such as making baskets, mats, or decorative items.",
+            "Incorporate banana leaves into your garden mulch or compost to promote sustainability and enrich your soil."
             ]
         elif product_type == 'Banana Stem':
             recommendation_plan = [
             "Look for firm, unblemished banana stems with no signs of rot.",
             "Utilize banana stems in various dishes like salads, stir-fries, or curries.",
-            "Prepare the stem by removing the tough outer layers and cutting it into desired shapes before cooking."
+            "Prepare the stem by removing the tough outer layers and cutting it into desired shapes before cooking.",
+            "Try making a refreshing South Indian banana stem salad (thoran) with coconut and spices.",
+            "Incorporate banana stems into vegetarian or vegan recipes as a nutritious and fibrous ingredient.",
+            "Experiment with blending banana stems into smoothies or juices for added health benefits.",
+            "Consider using banana stems in soups and stews to impart a unique flavor and texture to your dishes.",
             ]
         else:
             # Handle the case where product_type is not supported (e.g., return a 404 error)
