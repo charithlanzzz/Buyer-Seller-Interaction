@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  'BANANA XPERT',
+                  'BananaXpert',
                   style: TextStyle(
                     fontFamily: 'Cabin',
                     fontSize: 12,
