@@ -88,24 +88,48 @@ class BuyerOutput extends StatelessWidget {
                         ))
                     .toList(),
               ),
-            SizedBox(height: 16),
-            Text(
-              'Recommendation Plan:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
+            SizedBox(height: 24),
             if (responseData['recommendation_plan'] != null)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: responseData['recommendation_plan']
-                    .map<Widget>((recommendation) => Text(
-                          '- $recommendation',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 11, 30,
-                                107), // Change this to your desired color
-                          ),
-                        ))
-                    .toList(),
+                children: <Widget>[
+                  Text(
+                    'Recommendation Plan:',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 8),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: responseData['recommendation_plan'].length,
+                    itemBuilder: (context, index) {
+                      final recommendation =
+                          responseData['recommendation_plan'][index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.check_circle,
+                              color: Colors.green, // Icon color
+                              size: 20,
+                            ),
+                            SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                recommendation,
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 11, 30, 107),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
           ],
         ),
