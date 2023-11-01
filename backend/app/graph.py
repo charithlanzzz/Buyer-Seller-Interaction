@@ -1,4 +1,3 @@
-#Get the inputs by the terminal and output the scatter plots
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -46,8 +45,9 @@ elif user_type == 'seller':
     # Get user input for max_quantity
     max_quantity = float(input("Enter the maximum quantity (kg): "))
 
-# Get user input for location name
-location_name = input("Enter the location name: ").strip()
+# Get user input for latitude and longitude
+latitude = float(input("Enter latitude: "))
+longitude = float(input("Enter longitude: "))
 
 # Get user input for the radius
 radius = float(input("Enter the radius (in kilometers) for nearby stakeholders: "))
@@ -87,42 +87,37 @@ elif user_type == 'seller':
 
 # Check if there are any matching stakeholders
 if not filtered_data.empty:
-    # Retrieve latitude and longitude values for the given location name
-    location_data = data.loc[data['location_name'] == location_name, location_columns + [id_column, stakeholder_name, contact_number]].values
+    # Create a BallTree using the latitude and longitude coordinates of stakeholders
+    coordinates = filtered_data[location_columns].values
+    tree = BallTree(coordinates, leaf_size=40)  # Adjust leaf_size parameter as needed
 
-    # Check if location data is available
-    if len(location_data) > 0:
-        # Get the latitude and longitude values
-        latitude = location_data[0][0]
-        longitude = location_data[0][1]
+    # Perform a nearest neighbor search to find stakeholders within the specified radius
+    indices = tree.query_radius([[latitude, longitude]], r=radius)[0]
 
-        # Create a BallTree using the latitude and longitude coordinates of stakeholders
-        coordinates = filtered_data[location_columns].values
-        tree = BallTree(coordinates, leaf_size=40)  # Adjust leaf_size parameter as needed
+    # Filter nearby stakeholders based on the obtained indices
+    nearby_stakeholders = filtered_data.iloc[indices]
 
-        # Perform a nearest neighbor search to find stakeholders within the specified radius
-        indices = tree.query_radius([[latitude, longitude]], r=radius)[0]
+    # Calculate distances and filter by radius
+    nearby_stakeholders['distance'] = nearby_stakeholders.apply(
+        lambda row: geodesic((latitude, longitude), (row['latitude'], row['longitude'])).kilometers,
+        axis=1
+    )
+    nearby_stakeholders = nearby_stakeholders[nearby_stakeholders['distance'] <= radius]
 
-        # Filter nearby stakeholders based on the obtained indices
-        nearby_stakeholders = filtered_data.iloc[indices]
+    # Plotting the nearby stakeholders' locations
+    plt.figure(figsize=(10, 6))
+    plt.scatter(nearby_stakeholders['latitude'], nearby_stakeholders['longitude'], c='green', label='Nearby Stakeholders', marker='o', s=50)
+    plt.scatter(latitude, longitude, c='red', label='Given Location', marker='x', s=100)
+    plt.xlabel('Latitude')
+    plt.ylabel('Longitude')
+    plt.title(f'Nearby Stakeholders within {radius} km')
+    plt.legend()
 
-        # Calculate distances and filter by radius
-        nearby_stakeholders['distance'] = nearby_stakeholders.apply(
-            lambda row: geodesic((latitude, longitude), (row['latitude'], row['longitude'])).kilometers,
-            axis=1
-        )
-        nearby_stakeholders = nearby_stakeholders[nearby_stakeholders['distance'] <= radius]
+    # Annotate location names near the green dots
+    for index, row in nearby_stakeholders.iterrows():
+        plt.annotate(row['location_name'], (row['latitude'], row['longitude']), fontsize=10, color='blue', alpha=0.7)
 
-        # Plotting the nearby stakeholders' locations
-        plt.figure(figsize=(10, 6))
-        plt.scatter(nearby_stakeholders['latitude'], nearby_stakeholders['longitude'], c='green', label='Nearby Stakeholders', marker='o', s=50)
-        plt.scatter(latitude, longitude, c='red', label='Given Location', marker='x', s=100)
-        plt.xlabel('Latitude')
-        plt.ylabel('Longitude')
-        plt.title(f'Nearby Stakeholders within {radius} km')
-        plt.legend()
-        plt.show()
-    else:
-        print("Invalid location name entered.")
+
+    plt.show()
 else:
     print("No matching stakeholders found based on the given requirements")
